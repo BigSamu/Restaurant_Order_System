@@ -5,7 +5,7 @@ import path from "path";
 const env = process.env.NODE_ENV || "development";
 
 // Build the .env file name based on the current environment
-const envPath = path.resolve(process.cwd(), `.env.${env}`);
+const envPath = path.resolve(process.cwd(), `../../.env.${env}`);
 
 // Load environment variables from the corresponding .env file
 dotenv.config({ path: envPath });

@@ -10,14 +10,14 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Copy the source code into the container
+COPY . .
+
 # Run the build
 RUN npm run build
-
-# Copy the transpiled code into the container
-COPY dist/ .
 
 # Expose the port the app runs on
 EXPOSE 8080
 
 # Command to run the app
-CMD ["node", "app.cjs"]
+CMD ["node", "dist/app.cjs"]
