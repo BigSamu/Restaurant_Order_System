@@ -1,29 +1,64 @@
 version: '3.8'
 services:
-  kitchen-service:
-    build:
-      context: ./microservices/kitchen-service
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080" # Map port 8080 of the container to port 8080 on the host
-    environment:
-      - NODE_ENV=${NODE_ENV}
 
-  # warehouse-service:
-  #   build:
-  #     context: ./microservices/warehouse-service
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "8081:8080" # Assuming warehouse service also runs on port 8080 within the container, map it to 8081 on the host
-  #   environment:
-  #     - NODE_ENV=${NODE_ENV}
-  #     - DATABASE_URL=${DATABASE_URL}
+  # MongoDB Service
+  mongo-db:
+    image: mongo:6.0.12
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo:/data/db
+      - mongoConf:/data/configdb
 
   # order-management-ui:
   #   build:
   #     context: ./order-management-ui
-  #     dockerfile: Dockerfile # Assuming you have a Dockerfile here as well
+  #     dockerfile: Dockerfile
   #   ports:
-  #     - "3000:3000" # Adjust the ports as necessary for your UI service
+  #     - "3000:3000" # Map port 3000 of the container to port 3000 on the host
   #   environment:
   #     - NODE_ENV=production
+
+  kitchen-service:
+    restart: always
+    build:
+      context: ./kitchen-service
+      dockerfile: Dockerfile
+    image : restaurant-order-system/kitchen-service
+    ports:
+      - "8080:8080" # Map port 8080 of the container to port 8082 on the host
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+    depends_on:
+      - mongo-db
+
+  warehouse-service:
+    restart: always
+    build:
+      context: ./warehouse-service
+      dockerfile: Dockerfile
+    image: restaurant-order-system/warehouse-service
+    ports:
+      - "8081:8080" # Map port 8080 of the container to port 8081 on the host
+    environment:
+      - NODE_ENV=${NODE_ENV}
+      - DATABASE_USER=${DATABASE_USER}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_PORT=${DATABASE_PORT}
+      - DATABASE_NAME=${DATABASE_NAME}
+    depends_on:
+      - mongo-db
+
+volumes:
+  mongo:
+  mongoConf:

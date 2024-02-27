@@ -4,7 +4,9 @@
 
 import express from "express";
 
-import { PORT, API_PATH_SUFFIX } from "./config/constants.js";
+import { PORT, SERVICE_NAME } from "./config/index.js";
+import { connectDB } from "./config/index.js";
+import { preloadIngredients } from "./scripts/index.js";
 
 // Initialize express instance
 const app = express(); // Express server
@@ -13,11 +15,13 @@ const app = express(); // Express server
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Subscribe API routes
+// Initializing connection to NoSQL database (MongoDB) using Moongose interface
+connectDB()
 
+// Preload ingredients in Database
+preloadIngredients();
 
 // Run Express server instance in selected port
 app.listen(PORT, () => {
-  console.log(`Server is listening on port: ${PORT}`);
-  console.log("Press Ctrl + C to quit.");
+  console.log(`${SERVICE_NAME} service is listening on port: ${PORT}`);
 });

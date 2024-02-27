@@ -3,6 +3,8 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "description": "Microservice with user interface of order management system of restaurant orders in restaurant",
+  "main": "src/app.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
