@@ -16,15 +16,22 @@ const {
   DATABASE_HOST,
   DATABASE_PORT,
   DATABASE_NAME,
+  RESTAURANT_ORDER_SYSTEM_DOMAIN,
 } = process.env;
 
 export const PORT = 8081;
 export const DATABASE_URL = `mongodb://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}`;
 
-console.log(DATABASE_URL);
-
 export const SERVICE_NAME = "Warehouse";
-export const API_PATH_SUFFIX = "/api/v1/warehouse";
+export const KITCHEN_API_PATH_SUFFIX = "api/v1/kitchen";
+export const WAREHOUSE_API_PATH_SUFFIX = "api/v1/warehouse";
+
+export const KITCHEN_API_BASE_URL = RESTAURANT_ORDER_SYSTEM_DOMAIN
+  ? `https://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`
+  : `http://localhost:8080/${WAREHOUSE_API_PATH_SUFFIX}`;
+
+export const MARKET_API_BASE_URL =
+  "https://recruitment.alegra.com/api/farmers-market/buy";
 
 export const INGREDIENTS_LIST = [
   "tomato",

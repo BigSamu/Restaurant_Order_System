@@ -2,7 +2,7 @@ version: '3.8'
 services:
 
   # MongoDB Service
-  mongo-db:
+  mongo:
     image: mongo:6.0.12
     restart: unless-stopped
     environment:
@@ -30,7 +30,7 @@ services:
       dockerfile: Dockerfile
     image : restaurant-order-system/kitchen-service
     ports:
-      - "8080:8080" # Map port 8080 of the container to port 8082 on the host
+      - "8080:8080" # Map port 8080 of the container to port 8080 on the host
     environment:
       - NODE_ENV=${NODE_ENV}
       - DATABASE_USER=${DATABASE_USER}
@@ -38,8 +38,11 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
+    volumes:
+      - ./kitchen-service:/app
+    command: npm run start
     depends_on:
-      - mongo-db
+      - mongo
 
   warehouse-service:
     restart: always
@@ -56,8 +59,11 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
+    volumes:
+      - ./warehouse-service:/app
+    command: npm run start
     depends_on:
-      - mongo-db
+      - mongo
 
 volumes:
   mongo:

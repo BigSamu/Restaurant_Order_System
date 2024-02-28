@@ -1,1 +1,1 @@
-export * from "./preloadRecipes.js";
+export * from "./recipe.script.js";

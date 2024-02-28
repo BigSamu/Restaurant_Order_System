@@ -1,1 +1,1 @@
-export * from "./preloadIngredients.js";
+export * from "./ingredient.script.js";

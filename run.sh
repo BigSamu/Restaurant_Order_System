@@ -13,3 +13,4 @@ if [ -z "$env_file" ]; then
 fi
 
 docker-compose --env-file $env_file up --build
+```

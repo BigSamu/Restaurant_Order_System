@@ -4,7 +4,8 @@
 
 import express from "express";
 
-import { PORT, SERVICE_NAME, API_PATH_SUFFIX } from "./config/index.js";
+import { PORT, SERVICE_NAME, KITCHEN_API_PATH_SUFFIX } from "./config/index.js";
+import { recipeRouter, orderRouter } from "./routes/index.js";
 import { connectDB } from "./config/index.js";
 import { preloadRecipes } from "./scripts/index.js";
 
@@ -16,12 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Initializing connection to NoSQL database (MongoDB) using Moongose interface
-connectDB()
+connectDB();
 
 // Preload ingredients in Database
 preloadRecipes();
 
-
+// Subscribe API routes
+app.use(`/${KITCHEN_API_PATH_SUFFIX}`, recipeRouter);
+app.use(`/${KITCHEN_API_PATH_SUFFIX}`, orderRouter);
 
 // Run Express server instance in selected port
 app.listen(PORT, () => {
