@@ -5,8 +5,7 @@ import {
   MESSAGE_BROKER_PASSWORD,
   MESSAGE_BROKER_HOST,
   MESSAGE_BROKER_PORT,
-  INGREDIENTS_CHECK_QUEUE,
-  INGREDIENTS_AVAILABLE_QUEUE,
+  INGREDIENTS_CHECK_QUEUE
 } from "./constants.config.js";
 
 let messageBrokerChannel = null;
@@ -31,13 +30,8 @@ export const connectMessageBroker = async () => {
       durable: true, // Ensures the queue is not lost even if RabbitMQ restarts
     });
 
-    // Declare the 'ingredients_available' queue
-    await newChannel.assertQueue(INGREDIENTS_AVAILABLE_QUEUE, {
-      durable: true, // Ensures the queue is not lost even if RabbitMQ restarts
-    });
-
     console.log(
-      `${SERVICE_NAME} service established a connection to message broker service and declared '${INGREDIENTS_CHECK_QUEUE}' and '${INGREDIENTS_AVAILABLE_QUEUE}' queues`
+      `${SERVICE_NAME} service established a connection to message broker service and declared '${INGREDIENTS_CHECK_QUEUE}' queue`
     );
 
     messageBrokerChannel = newChannel;

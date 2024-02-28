@@ -6,7 +6,7 @@ const ingredientSchema = new mongoose.Schema(
     available: { type: Number, required: true },
   },
   {
-    timestamps: true,
+    timestamps: { createdAt: "created_at", updatedAt: "updated_at" },
   }
 );
 

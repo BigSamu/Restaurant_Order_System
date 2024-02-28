@@ -1,13 +1,11 @@
-// ---------------------------------------------------
-// SERVER INITIALIZATION AND CONFIGURATION SETUP
-// ---------------------------------------------------
 
 import express from "express";
 
 import { PORT, SERVICE_NAME, WAREHOUSE_API_PATH_SUFFIX} from "./config/index.js";
 import { ingredientRouter } from "./routes/index.js";
-import { connectDB } from "./config/index.js";
+import { connectDB, connectMessageBroker } from "./config/index.js";
 import { preloadIngredients } from "./scripts/index.js";
+import { startOrderIngredientsCheckConsumer } from "./services/index.js";
 
 // Initialize express instance
 const app = express(); // Express server
@@ -17,7 +15,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Initializing connection to NoSQL database (MongoDB) using Moongose interface
-connectDB()
+await connectDB()
+
+// Initializing connection to RabbitMQ message broker and start the consumer
+await connectMessageBroker();
+await startOrderIngredientsCheckConsumer();
 
 // Preload ingredients in Database
 preloadIngredients();

@@ -10,13 +10,18 @@ const envPath = path.resolve(process.cwd(), `../.env.${env}`);
 // Load environment variables from the corresponding .env file
 dotenv.config({ path: envPath });
 
-const {
+export const {
+  RESTAURANT_ORDER_SYSTEM_DOMAIN,
   DATABASE_USER,
   DATABASE_PASSWORD,
   DATABASE_HOST,
   DATABASE_PORT,
   DATABASE_NAME,
-  RESTAURANT_ORDER_SYSTEM_DOMAIN,
+  MESSAGE_BROKER_USER,
+  MESSAGE_BROKER_PASSWORD,
+  MESSAGE_BROKER_HOST,
+  MESSAGE_BROKER_PORT,
+  INGREDIENTS_CHECK_QUEUE
 } = process.env;
 
 export const PORT = 8081;

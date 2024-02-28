@@ -13,6 +13,18 @@ services:
     volumes:
       - mongo:/data/db
       - mongoConf:/data/configdb
+  rabbitmq:
+    image: rabbitmq:3.9-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - rabbitMQData:/var/lib/rabbitmq/
+      - rabbitMQLogs:/var/log/rabbitmq/
+    environment:
+      RABBITMQ_DEFAULT_USER: ${MESSAGE_BROKER_USER}
+      RABBITMQ_DEFAULT_PASS: ${MESSAGE_BROKER_PASSWORD}
 
   # order-management-ui:
   #   build:
@@ -68,3 +80,5 @@ services:
 volumes:
   mongo:
   mongoConf:
+  rabbitMQData:
+  rabbitMQLogs:

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Ingredient } from "../models/ingredient.model.js";
+import { Ingredient } from "../models/index.js";
 import { marketServices } from "../services/index.js";
 
 const { ObjectId } = mongoose.Types;
@@ -24,7 +24,7 @@ const getOneById = async (req, res, next) => {
     if (!ingredient) {
       return res.status(404).json({ message: "Ingredient not found" });
     }
-    
+
     res.status(200).json(ingredient);
   } catch (error) {
     res.status(500).json({ message: "Something went wrong", error: err });
