@@ -6,7 +6,7 @@ import express from "express";
 
 import { PORT, SERVICE_NAME, KITCHEN_API_PATH_SUFFIX } from "./config/index.js";
 import { recipeRouter, orderRouter } from "./routes/index.js";
-import { connectDB } from "./config/index.js";
+import { connectDB, connectMessageBroker } from "./config/index.js";
 import { preloadRecipes } from "./scripts/index.js";
 
 // Initialize express instance
@@ -17,7 +17,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Initializing connection to NoSQL database (MongoDB) using Moongose interface
-connectDB();
+await connectDB();
+
+// Initializing connection to RabbitMQ message broker
+await connectMessageBroker();
 
 // Preload ingredients in Database
 preloadRecipes();

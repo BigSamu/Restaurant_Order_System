@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { Recipe } from "../models/recipe.model.js";
+import { Recipe } from "../models/index.js";
 
 const { ObjectId } = mongoose.Types;
 
