@@ -12,5 +12,5 @@ if [ -z "$env_file" ]; then
     exit 1
 fi
 
-docker-compose --env-file $env_file up --build
+docker-compose --env-file $env_file up
 ```
