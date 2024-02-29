@@ -1,6 +1,5 @@
-version: '3.8'
+version: "3.8"
 services:
-
   # MongoDB Service
   mongo:
     image: mongo:6.0.12
@@ -15,7 +14,7 @@ services:
       - mongoConf:/data/configdb
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
-    container_name: 'rabbitmq'
+    container_name: "rabbitmq"
     ports:
       - 5672:5672
       - 15672:15672
@@ -26,21 +25,20 @@ services:
       RABBITMQ_DEFAULT_USER: ${MESSAGE_BROKER_USER}
       RABBITMQ_DEFAULT_PASS: ${MESSAGE_BROKER_PASSWORD}
 
-  # order-management-ui:
-  #   build:
-  #     context: ./order-management-ui
-  #     dockerfile: Dockerfile
-  #   ports:
-  #     - "3000:3000" # Map port 3000 of the container to port 3000 on the host
-  #   environment:
-  #     - NODE_ENV=production
+  order-management-ui:
+    build:
+      context: ./order-management-ui
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80" # Map port 3000 of the container to port 80 on the host
+    environment:
+      - NODE_ENV=${NODE_ENV}
 
   kitchen-service:
     restart: always
     build:
       context: ./kitchen-service
       dockerfile: Dockerfile
-    image : restaurant-order-system/kitchen-service
     ports:
       - "8080:8080" # Map port 8080 of the container to port 8080 on the host
     environment:
@@ -50,18 +48,23 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
+      - MESSAGE_BROKER_USER=${MESSAGE_BROKER_USER}
+      - MESSAGE_BROKER_PASSWORD=${MESSAGE_BROKER_PASSWORD}
+      - MESSAGE_BROKER_HOST=${MESSAGE_BROKER_HOST}
+      - MESSAGE_BROKER_PORT=${MESSAGE_BROKER_PORT}
+      - INGREDIENTS_CHECK_QUEUE=${INGREDIENTS_CHECK_QUEUE}
     volumes:
       - ./kitchen-service:/app
     command: npm run start
     depends_on:
       - mongo
+      - rabbitmq
 
   warehouse-service:
     restart: always
     build:
       context: ./warehouse-service
       dockerfile: Dockerfile
-    image: restaurant-order-system/warehouse-service
     ports:
       - "8081:8080" # Map port 8080 of the container to port 8081 on the host
     environment:
@@ -71,11 +74,17 @@ services:
       - DATABASE_HOST=${DATABASE_HOST}
       - DATABASE_PORT=${DATABASE_PORT}
       - DATABASE_NAME=${DATABASE_NAME}
+      - MESSAGE_BROKER_USER=${MESSAGE_BROKER_USER}
+      - MESSAGE_BROKER_PASSWORD=${MESSAGE_BROKER_PASSWORD}
+      - MESSAGE_BROKER_HOST=${MESSAGE_BROKER_HOST}
+      - MESSAGE_BROKER_PORT=${MESSAGE_BROKER_PORT}
+      - INGREDIENTS_CHECK_QUEUE=${INGREDIENTS_CHECK_QUEUE}
     volumes:
       - ./warehouse-service:/app
     command: npm run start
     depends_on:
       - mongo
+      - rabbitmq
 
 volumes:
   mongo:

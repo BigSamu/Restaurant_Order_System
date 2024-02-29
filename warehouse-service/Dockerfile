@@ -4,14 +4,11 @@ FROM node:16
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
+# Copy the source code into the container
+COPY . .
 
 # Install dependencies
 RUN npm install
-
-# Copy the source code into the container
-COPY . .
 
 # Run the build
 RUN npm run build
