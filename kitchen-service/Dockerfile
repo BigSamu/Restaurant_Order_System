@@ -17,4 +17,4 @@ RUN npm run build
 EXPOSE 8080
 
 # Command to run the app
-CMD ["node", "dist/app.cjs"]
+# CMD ["node", "dist/app.cjs"]
