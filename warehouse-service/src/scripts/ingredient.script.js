@@ -3,9 +3,9 @@
 import { Ingredient } from "../models/ingredient.model.js";
 import { INGREDIENTS_LIST } from "../config/constants.config.js";
 
-const ingredients = INGREDIENTS_LIST.map(item => ({
+const ingredients = INGREDIENTS_LIST.map((item) => ({
   name: item,
-  available: 5
+  available: 5,
 }));
 
 export const preloadIngredients = async () => {
@@ -17,11 +17,12 @@ export const preloadIngredients = async () => {
         { upsert: true } // Upsert option
       );
     }
-    const ingredientsInWarehouse = ingredients.map(item =>
-      ` - ${item.name}: ${item.available}`).join("\n");
+    const ingredientsInWarehouse = ingredients
+      .map((item) => ` - ${item.name}: ${item.available}`)
+      .join("\n");
     console.log(
-      `Ingredients preloaded successfully! Ingredients available in warehouse:\n${ingredientsInWarehouse}`);
-
+      `Ingredients preloaded successfully! Ingredients available in warehouse:\n${ingredientsInWarehouse}`
+    );
   } catch (error) {
     console.error("Error preloading/updating ingredients:", error);
   }

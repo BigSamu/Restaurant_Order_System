@@ -5,7 +5,7 @@ import { PORT, SERVICE_NAME, WAREHOUSE_API_PATH_SUFFIX} from "./config/index.js"
 import { ingredientRouter } from "./routes/index.js";
 import { connectDB, connectMessageBroker } from "./config/index.js";
 import { preloadIngredients } from "./scripts/index.js";
-import { startOrderIngredientsCheckConsumer } from "./services/index.js";
+import { messageBrokerService } from "./services/index.js";
 
 // Initialize express instance
 const app = express(); // Express server
@@ -19,7 +19,7 @@ await connectDB()
 
 // Initializing connection to RabbitMQ message broker and start the consumer
 await connectMessageBroker();
-await startOrderIngredientsCheckConsumer();
+await messageBrokerService.startOrderIngredientsCheckConsumer();
 
 // Preload ingredients in Database
 preloadIngredients();

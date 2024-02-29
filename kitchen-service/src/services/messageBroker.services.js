@@ -1,7 +1,7 @@
 import { getMessageBrokerChannel } from "../config/index.js";
 import { SERVICE_NAME, INGREDIENTS_CHECK_QUEUE } from "../config/index.js";
 
-export const sendOrderToCheckIngredients = async (order) => {
+const sendOrderToCheckIngredients = async (order) => {
   try {
     const channel = getMessageBrokerChannel(); // Use the existing channel
     channel.sendToQueue(
@@ -9,7 +9,7 @@ export const sendOrderToCheckIngredients = async (order) => {
       Buffer.from(JSON.stringify(order))
     );
     console.log(
-      `${SERVICE_NAME} service sent order for '${order.name}' to '${INGREDIENTS_CHECK_QUEUE}' queue`
+      `${SERVICE_NAME} service sent order for '${order.name}' to '${INGREDIENTS_CHECK_QUEUE}' queue...`
     );
   } catch (err) {
     console.error(
@@ -18,4 +18,8 @@ export const sendOrderToCheckIngredients = async (order) => {
     );
     throw err;
   }
+};
+
+export const messageBrokerService = {
+  sendOrderToCheckIngredients,
 };
