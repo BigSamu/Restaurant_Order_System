@@ -5,9 +5,6 @@ FROM node:16 AS build
 # Set the working directory in the Docker container
 WORKDIR /app
 
-# Set the working directory in the container
-WORKDIR /app
-
 # Copy the source code into the container
 COPY . .
 
