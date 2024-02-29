@@ -30,7 +30,7 @@ services:
       context: ./order-management-ui
       dockerfile: Dockerfile
     ports:
-      - "3000:80" # Map port 3000 of the container to port 80 on the host
+      - "80:80" # Map port 3000 of the container to port 80 on the host
     environment:
       - NODE_ENV=${NODE_ENV}
 
@@ -53,9 +53,7 @@ services:
       - MESSAGE_BROKER_HOST=${MESSAGE_BROKER_HOST}
       - MESSAGE_BROKER_PORT=${MESSAGE_BROKER_PORT}
       - INGREDIENTS_CHECK_QUEUE=${INGREDIENTS_CHECK_QUEUE}
-    volumes:
-      - ./kitchen-service:/app
-    command: npm run dev
+    command: npm run start
     depends_on:
       - mongo
       - rabbitmq
@@ -79,9 +77,7 @@ services:
       - MESSAGE_BROKER_HOST=${MESSAGE_BROKER_HOST}
       - MESSAGE_BROKER_PORT=${MESSAGE_BROKER_PORT}
       - INGREDIENTS_CHECK_QUEUE=${INGREDIENTS_CHECK_QUEUE}
-    volumes:
-      - ./warehouse-service:/app
-    command: npm run dev
+    command: npm run start
     depends_on:
       - mongo
       - rabbitmq
