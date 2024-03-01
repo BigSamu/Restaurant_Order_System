@@ -28,11 +28,15 @@ services:
   order-management-ui:
     build:
       context: ./order-management-ui
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     ports:
-      - "3000:80" # Map port 3000 of the container to port 80 on the host
+      - "3000:3000" # Map port 3000 of the container to port 80 on the host
     environment:
       - NODE_ENV=${NODE_ENV}
+    volumes:
+      - ./order-management-ui:/app
+      - /app/node_modules
+    command: npm run dev
 
   kitchen-service:
     restart: always

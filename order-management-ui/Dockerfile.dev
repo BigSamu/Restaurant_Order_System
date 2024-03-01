@@ -10,8 +10,8 @@ COPY . .
 # Install dependencies
 RUN npm install
 
-# Run the build
-RUN npm run build
-
 # Expose the port the app runs on
-EXPOSE 8080
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
+
