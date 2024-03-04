@@ -1,4 +1,3 @@
-
 <a name="back-to-top"></a>
 
 <!-- *********************************************************************** -->
@@ -16,15 +15,15 @@
 [![Gmail Small][gmail-badge-small]][gmail-url]
 [![LinkedIn Small][linkedin-badge-small]][linkedin-url]
 [![Hackerrank Small][hackerrank-badge-small]][linkedin-url]
+
 <!-- *********************************************************************** -->
 <!-- 0.3) PROJECT TITLE -->
 <!-- *********************************************************************** -->
 
 <!-- omit in toc -->
-
 # Restaurant Order System
 
-A demo of a restaurant order system, 
+A demo of a restaurant order system,
 
 Demo available in following [link](http://15.229.232.201/)
 
@@ -37,11 +36,8 @@ Demo available in following [link](http://15.229.232.201/)
 <!-- *********************************************************************** -->
 
 <!-- omit in toc -->
-
 ## Table of Contents
 
-- [Restaurant Order System](#restaurant-order-system)
-  - [Table of Contents](#table-of-contents)
 - [Macaroons Demo](#macaroons-demo)
   - [About The Project](#about-the-project)
   - [Technologies](#technologies)
@@ -53,10 +49,10 @@ Demo available in following [link](http://15.229.232.201/)
   - [Support](#support)
   - [License](#license)
 
-
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
+
 # Macaroons Demo
 
 <!-- *********************************************************************** -->
@@ -91,7 +87,6 @@ The following technologies are used for the implementation of this project:
 [![SQLite][sqlite-badge]][sqlite-url]
 [![PostgreSQL][postgresql-badge]][postgresql-url]
 [![Vercel][vercel-badge]][vercel-url]
-
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -139,16 +134,16 @@ To get a copy of this project and run it in your local environment, follow the s
    ```
 4. Create a .env file and update the enviromental variables that don't have values. Use as reference the `env.example`. For development, the enviromental variables that required an update are the following:
 
-    ```
-    NEXT_PUBLIC_CLIENT_DOMAIN_URL_PRODUCTION="<your-vercel-domain>"
-    ENVIRONMENT = "<development-or-production>" # Change for "development" for this case
-    MACAROON_SECRET_KEY="<your-very-strong-secret-key>"
-    ```
+   ```
+   NEXT_PUBLIC_CLIENT_DOMAIN_URL_PRODUCTION="<your-vercel-domain>"
+   ENVIRONMENT = "<development-or-production>" # Change for "development" for this case
+   MACAROON_SECRET_KEY="<your-very-strong-secret-key>"
+   ```
+
 5. Run appplication. Python packages will be installed automatically, because a script command has specifications for that.
    ```sh
    npm run dev
    ```
-
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -233,7 +228,6 @@ This project is licensed under the terms of the MIT license.
 Developed with ❤️ in Chile 🇨🇱
 </p>
 
-
 <!-- *********************************************************************** -->
 <!-- A) MARKDOWN LINKS & IMAGES -->
 <!-- *********************************************************************** -->
@@ -303,7 +297,8 @@ Developed with ❤️ in Chile 🇨🇱
 [flask-url]: https://flask.palletsprojects.com/
 
 <!-- FastAPI -->
-[fastapi-badge]:https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=fff&style=for-the-badge
+
+[fastapi-badge]: https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=fff&style=for-the-badge
 [fastapi-url]: https://fastapi.tiangolo.com/
 
 <!-- ExpressJS -->
@@ -317,13 +312,10 @@ Developed with ❤️ in Chile 🇨🇱
 
 [sqlite-badge]: https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=fff&style=for-the-badge
 [sqlite-url]: https://sqlite.org/
-
 [postgresql-badge]: https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=for-the-badge
 [postgresql-url]: https://www.postgresql.org/
-
 [mongodb-badge]: https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=fff&style=for-the-badge
 [mongodb-url]: https://www.mongodb.com/
-
 [mongoose-badge]: https://img.shields.io/badge/Mongoose-800?logo=mongoose&logoColor=fff&style=for-the-badge
 [mongoose-url]: https://mongoosejs.com/
 
@@ -350,6 +342,7 @@ Developed with ❤️ in Chile 🇨🇱
 [pypi-url]: https://pypi.org/
 
 <!-- Deployment Platforms and Technologies -->
+
 [vercel-badge]: https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=for-the-badge
 [vercel-url]: https://vercel.com/
 
@@ -357,10 +350,8 @@ Developed with ❤️ in Chile 🇨🇱
 
 [vscode-badge]: https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?logo=visualstudiocode&logoColor=fff&style=for-the-badge
 [vscode-url]: https://code.visualstudio.com/
-
 [github-badge]: https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=fff&style=for-the-badge
 [github-url]: https://github.com/
-
 [postman-badge]: https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=fff&style=for-the-badge
 [postman-url]: https://www.postman.com/
 
@@ -400,7 +391,7 @@ Developed with ❤️ in Chile 🇨🇱
 <!-- Gmail -->
 
 [gmail-badge]: https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white
-[gmail-badge-small]:https://img.shields.io/badge/--gmail?label=Gmail&logo=Gmail&style=social
+[gmail-badge-small]: https://img.shields.io/badge/--gmail?label=Gmail&logo=Gmail&style=social
 [gmail-url]: mailto:valdesgutierrez@gmail.com
 
 <!-- Twitter -->
