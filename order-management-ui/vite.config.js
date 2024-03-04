@@ -5,7 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 
 // Determine the current environment based on NODE_ENV, defaulting to 'development'
-const env = process.env.NODE_ENV || "development";
+const env = process.env.VITE_NODE_ENV || "development";
 
 // Manually specify the path to the external .env file
 const envPath = path.resolve(process.cwd(), `../.env.${env}`);
