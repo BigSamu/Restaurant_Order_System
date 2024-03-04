@@ -49,10 +49,10 @@ const startOrderIngredientsCheckConsumer = async () => {
         noAck: false, // Do not automatically acknowledge messages
       }
     );
-  } catch (error) {
+  } catch (err) {
     console.error(
       `Failed to consume messages from '${INGREDIENTS_CHECK_QUEUE}' queue:`,
-      error
+      err
     );
     throw err;
   }

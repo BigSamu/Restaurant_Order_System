@@ -26,13 +26,14 @@ services:
       RABBITMQ_DEFAULT_PASS: ${MESSAGE_BROKER_PASSWORD}
 
   order-management-ui:
+    restart: always
     build:
       context: ./order-management-ui
       dockerfile: Dockerfile.dev
+      args:
+        VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN: ${VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN}
     ports:
       - "3000:3000" # Map port 3000 of the container to port 80 on the host
-    environment:
-      - VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN=${VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN}
     volumes:
       - ./order-management-ui:/app
       - /app/node_modules
