@@ -1,5 +1,3 @@
-
-
 export const {
   RESTAURANT_ORDER_SYSTEM_DOMAIN,
   DATABASE_USER,
@@ -21,6 +19,7 @@ export const SERVICE_NAME = "Warehouse";
 export const KITCHEN_API_PATH_SUFFIX = "api/v1/kitchen";
 export const WAREHOUSE_API_PATH_SUFFIX = "api/v1/warehouse";
 
-export const KITCHEN_API_BASE_URL = RESTAURANT_ORDER_SYSTEM_DOMAIN
-  ? `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`
-  : `http://localhost:8080/${KITCHEN_API_PATH_SUFFIX}`;
+export const KITCHEN_API_BASE_URL =
+  env === "production"
+    ? `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`
+    : `http://localhost:8080/${KITCHEN_API_PATH_SUFFIX}`;
