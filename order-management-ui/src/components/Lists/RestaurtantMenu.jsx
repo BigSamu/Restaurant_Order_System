@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import ListGroup from "react-bootstrap/ListGroup";
-import { recipeService } from "../../services/recipe.services.js";
+import { kitchenService } from "../../services/index.js";
 
 const RestaurtantMenu = () => {
   const [recipes, setRecipes] = useState([]);
@@ -12,7 +12,7 @@ const RestaurtantMenu = () => {
 
   const getAllRecipes = async () => {
     try {
-      const menuAvailable = await recipeService.getAll();
+      const menuAvailable = await kitchenService.getAllRecipes();
       console.log(menuAvailable);
       setRecipes(menuAvailable);
     } catch (error) {

@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import { Button, Toast, ToastContainer, Fade } from "react-bootstrap";
+import { Button, Toast, ToastContainer } from "react-bootstrap";
 import './styles.css'; // Adjust the path to your CSS file accordingly
 
-import { orderService } from "../../services/index.js";
+import { kitchenService } from "../../services/index.js";
 
 const OrderButton = () => {
   const [toasts, setToasts] = useState([]);
@@ -19,7 +19,7 @@ const OrderButton = () => {
     setToasts([...toasts, newToast]);
 
     // Send the new order to the server
-    orderService.addNew();
+    kitchenService.addNewOrder();
   };
 
   return (

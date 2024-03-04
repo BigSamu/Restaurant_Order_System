@@ -1,2 +1,1 @@
-export * from "./recipe.services.js"
-export * from "./order.services.js"
+export * from "./kitchen.services.js"

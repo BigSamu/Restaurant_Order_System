@@ -12,9 +12,14 @@ services:
     volumes:
       - mongo:/data/db
       - mongoConf:/data/configdb
+
   rabbitmq:
     image: rabbitmq:3.9-management-alpine
-    container_name: "rabbitmq"
+    healthcheck:
+      test: ["CMD", "rabbitmqctl", "status"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - 5672:5672
       - 15672:15672
@@ -63,8 +68,10 @@ services:
       - ./kitchen-service:/app
     command: npm run dev
     depends_on:
-      - mongo
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_started
 
   warehouse-service:
     restart: always
@@ -90,8 +97,10 @@ services:
       - ./warehouse-service:/app
     command: npm run dev
     depends_on:
-      - mongo
-      - rabbitmq
+      rabbitmq:
+        condition: service_healthy
+      mongo:
+        condition: service_started
 
 volumes:
   mongo:
