@@ -18,4 +18,4 @@ if [ -z "$env_file" ]; then
     exit 1
 fi
 
-docker compose -f $compose_file --env-file $env_file up --build --force-recreate
+docker compose -f $compose_file --env-file $env_file up --build --force-recreate -d
