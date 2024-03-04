@@ -32,11 +32,6 @@ export const DATABASE_URL = `mongodb://${DATABASE_USER}:${DATABASE_PASSWORD}@${D
 
 export const SERVICE_NAME = "Kitchen";
 export const KITCHEN_API_PATH_SUFFIX = "api/v1/kitchen";
-export const WAREHOUSE_API_PATH_SUFFIX = "api/v1/warehouse";
-export const WAREHOUSE_API_BASE_URL =
-  env === "production"
-    ? `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${WAREHOUSE_API_PATH_SUFFIX}`
-    : `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}:${WAREHOUSE_PORT_SERVICE}/${WAREHOUSE_API_PATH_SUFFIX}`;
 
 export const RECIPES_LIST = [
   {
@@ -91,7 +86,7 @@ export const RECIPES_LIST = [
     description: "Hearty casserole with chicken, rice, and tomatoes.",
     ingredients: [
       { name: "chicken", quantity: 3 },
-      { name: "rice", quantity: 3},
+      { name: "rice", quantity: 3 },
       { name: "tomato", quantity: 2 },
     ],
   },
