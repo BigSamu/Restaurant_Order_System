@@ -1,3 +1,7 @@
+
+// export const RESTAURANT_ORDER_SYSTEM_DOMAIN = "localhost:8080";
+const env = process.env.NODE_ENV || "development";
+
 export const {
   RESTAURANT_ORDER_SYSTEM_DOMAIN,
   DATABASE_USER,
@@ -12,7 +16,6 @@ export const {
   INGREDIENTS_CHECK_QUEUE,
 } = import.meta.env;
 
-export const PORT = 8080;
 export const DATABASE_URL = `mongodb://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}`;
 
 export const SERVICE_NAME = "Warehouse";
