@@ -1,36 +1,14 @@
-# Build Stage
-# This stage installs all dependencies and builds the project
-FROM node:18-alpine AS build
+# Use a Node.js base image
+FROM node:18-alpine
 
-# Set the environment variable for the Vite Restaurant Order System domain
-ARG VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN
-
-# Set the working directory in the Docker container
+# Set the working directory in the container
 WORKDIR /app
 
 # Copy the source code into the container
 COPY . .
 
-# Set the environment variable for the Vite Restaurant Order System domain
-ENV VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN=$VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN
-
 # Install dependencies
 RUN npm install
 
-# Run the build
-RUN npm run build
-
-# Serve Stage
-# This stage sets up the Nginx server to serve the built application
-FROM nginx:stable-alpine AS serve
-
-# Copy built assets from the build stage to the default serve directory in nginx
-COPY --from=build /app/dist /usr/share/nginx/html
-# Copy the Nginx configuration file into the container
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# Expose port 80 to the outside once the container has launched
-EXPOSE 80
-
-# Start Nginx and serve the application
-CMD ["nginx", "-g", "daemon off;"]
+# Expose the port the app runs on
+EXPOSE 3000

@@ -4,6 +4,8 @@
 
 import express from "express";
 import cors from "cors";
+import http from "http"; // Import http module
+import { Server as SocketIOServer } from "socket.io"; // Import Socket.IO
 
 import {
   RESTAURANT_ORDER_SYSTEM_DOMAIN,
@@ -13,7 +15,11 @@ import {
   KITCHEN_API_PATH_SUFFIX,
 } from "./config/index.js";
 import { recipeRouter, orderRouter } from "./routes/index.js";
-import { connectDB, connectMessageBroker } from "./config/index.js";
+import {
+  connectDB,
+  connectMessageBroker,
+  setupSocketConnection,
+} from "./config/index.js";
 import { preloadRecipes } from "./scripts/index.js";
 
 // Initialize express instance
@@ -53,8 +59,14 @@ preloadRecipes();
 app.use(`/${KITCHEN_API_PATH_SUFFIX}`, recipeRouter);
 app.use(`/${KITCHEN_API_PATH_SUFFIX}`, orderRouter);
 
+// Create an HTTP server and pass the Express app
+const httpServer = http.createServer(app);
+
+// Set up Socket.IO connection
+setupSocketConnection(httpServer, corsOptions);
+
 // Run Express server instance in selected port
-app.listen(KITCHEN_PORT_SERVICE, () => {
+httpServer.listen(KITCHEN_PORT_SERVICE, () => {
   console.log(
     `${SERVICE_NAME} service is listening on port: ${KITCHEN_PORT_SERVICE}`
   );

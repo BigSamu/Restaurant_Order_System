@@ -7,3 +7,5 @@ export const RESTAURANT_ORDER_SYSTEM_DOMAIN =
   MODE === "production"
     ? `http://${VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN}`
     : `http://localhost:8080`;
+
+export const KITCHEN_API_BASE_URL = `${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`;

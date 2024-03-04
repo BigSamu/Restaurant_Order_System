@@ -1,25 +1,29 @@
 import React, { useState } from "react";
+import { useOrderContext } from "../../contexts/OrderContext.jsx";
 
 import { Button, Toast, ToastContainer } from "react-bootstrap";
-import './styles.css'; // Adjust the path to your CSS file accordingly
+import "./styles.css"; // Adjust the path to your CSS file accordingly
 
 import { kitchenService } from "../../services/index.js";
 
 const OrderButton = () => {
-  const [toasts, setToasts] = useState([]);
+  const { currentOrders, setCurrentOrders } = useOrderContext();
 
-  const handleOnClickOrderDish = () => {
-    // Create a new toast object
-    const newToast = {
-      id: new Date().getTime(), // Unique ID for key prop
-      message: "New order has been sent!", // Example message
-    };
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
-    // Add the new toast to the array of toasts
-    setToasts([...toasts, newToast]);
+  const handleOnClickOrderDish = async () => {
+    setShowToast(true); // Show the toast
+    setToastMessage("New order has been sent!"); // Set the toast message
 
     // Send the new order to the server
-    kitchenService.addNewOrder();
+    const { order: newOrder } = await kitchenService.addNewOrder();
+    setCurrentOrders([...currentOrders, newOrder]);
+
+    // Optionally, hide the toast after a delay
+    setTimeout(() => {
+      setShowToast(false);
+    }, 3000); // Autohide after 3 seconds
   };
 
   return (
@@ -33,10 +37,10 @@ const OrderButton = () => {
         </div>
       </div>
       <ToastContainer className="p-3" position="top-end">
-        {toasts.map((toast) => (
+        {showToast && (
           <Toast
-            key={toast.id}
-            onClose={() => setToasts(toasts.filter((t) => t.id !== toast.id))}
+            onClose={() => setShowToast(false)}
+            show={showToast}
             delay={3000}
             autohide
             bg="primary"
@@ -45,9 +49,9 @@ const OrderButton = () => {
             <Toast.Header>
               <strong className="me-auto">Order Status</strong>
             </Toast.Header>
-            <Toast.Body className="text-white">{toast.message}</Toast.Body>
+            <Toast.Body className="text-white">{toastMessage}</Toast.Body>
           </Toast>
-        ))}
+        )}
       </ToastContainer>
     </>
   );
