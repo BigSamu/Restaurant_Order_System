@@ -1,7 +1,10 @@
-
 import express from "express";
 
-import { PORT, SERVICE_NAME, WAREHOUSE_API_PATH_SUFFIX} from "./config/index.js";
+import {
+  WAREHOUSE_PORT_SERVICE,
+  SERVICE_NAME,
+  WAREHOUSE_API_PATH_SUFFIX,
+} from "./config/index.js";
 import { ingredientRouter } from "./routes/index.js";
 import { connectDB, connectMessageBroker } from "./config/index.js";
 import { preloadIngredients } from "./scripts/index.js";
@@ -15,7 +18,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Initializing connection to NoSQL database (MongoDB) using Moongose interface
-await connectDB()
+await connectDB();
 
 // Initializing connection to RabbitMQ message broker and start the consumer
 await connectMessageBroker();
@@ -28,6 +31,8 @@ preloadIngredients();
 app.use(`/${WAREHOUSE_API_PATH_SUFFIX}`, ingredientRouter);
 
 // Run Express server instance in selected port
-app.listen(PORT, () => {
-  console.log(`${SERVICE_NAME} service is listening on port: ${PORT}`);
+app.listen(WAREHOUSE_PORT_SERVICE, () => {
+  console.log(
+    `${SERVICE_NAME} service is listening on port: ${WAREHOUSE_PORT_SERVICE}`
+  );
 });

@@ -5,7 +5,13 @@
 import express from "express";
 import cors from "cors";
 
-import { PORT, SERVICE_NAME, KITCHEN_API_PATH_SUFFIX } from "./config/index.js";
+import {
+  RESTAURANT_ORDER_SYSTEM_DOMAIN,
+  KITCHEN_PORT_SERVICE,
+  UI_PORT_SERVICE,
+  SERVICE_NAME,
+  KITCHEN_API_PATH_SUFFIX,
+} from "./config/index.js";
 import { recipeRouter, orderRouter } from "./routes/index.js";
 import { connectDB, connectMessageBroker } from "./config/index.js";
 import { preloadRecipes } from "./scripts/index.js";
@@ -18,10 +24,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Set up CORS policy
+
+const allowedOrigins =
+  process.env.NODE_ENV === "development"
+    ? [
+        `http://localhost:${UI_PORT_SERVICE}`,
+        `http://127.0.0.1:${UI_PORT_SERVICE}`,
+      ]
+    : [`http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}`];
+
 const corsOptions = {
-  credentials: true, // Allow credentials (cookies) to be sent to/from origin
-  origin: 'http://localhost:3000', // Allow only this origin
-  methods: 'GET, POST, PUT, DELETE', // Allow these methods
+  credentials: true,
+  origin: allowedOrigins,
+  methods: "GET, POST, PUT, DELETE", // Allow these methods
 };
 app.use(cors(corsOptions));
 
@@ -39,6 +54,8 @@ app.use(`/${KITCHEN_API_PATH_SUFFIX}`, recipeRouter);
 app.use(`/${KITCHEN_API_PATH_SUFFIX}`, orderRouter);
 
 // Run Express server instance in selected port
-app.listen(PORT, () => {
-  console.log(`${SERVICE_NAME} service is listening on port: ${PORT}`);
+app.listen(KITCHEN_PORT_SERVICE, () => {
+  console.log(
+    `${SERVICE_NAME} service is listening on port: ${KITCHEN_PORT_SERVICE}`
+  );
 });

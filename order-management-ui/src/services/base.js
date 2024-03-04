@@ -1,12 +1,10 @@
 import axios from 'axios';
-import { API_URL } from '../config';
-import http from 'http';
+import { KITCHEN_API_BASE_URL } from '../config/index.js';
 
 const baseService = (options = {}) => {
   const { headers = {}, params = {} } = options;
   const baseServiceDefault = axios.create({
-    baseURL: `${API_URL}`,
-    httpAgent: new http.Agent({ family: 4 }),
+    baseURL: `${KITCHEN_API_BASE_URL}`,
     headers: {
       'Content-Type': 'application/json',
       ...headers,

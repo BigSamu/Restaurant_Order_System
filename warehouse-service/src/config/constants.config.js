@@ -21,19 +21,22 @@ export const {
   MESSAGE_BROKER_PASSWORD,
   MESSAGE_BROKER_HOST,
   MESSAGE_BROKER_PORT,
-  INGREDIENTS_CHECK_QUEUE
+  INGREDIENTS_CHECK_QUEUE,
 } = process.env;
 
-export const PORT = 8080;
+export const KITCHEN_PORT_SERVICE = 8080;
+export const WAREHOUSE_PORT_SERVICE = 8081;
+
 export const DATABASE_URL = `mongodb://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}`;
 
 export const SERVICE_NAME = "Warehouse";
 export const KITCHEN_API_PATH_SUFFIX = "api/v1/kitchen";
 export const WAREHOUSE_API_PATH_SUFFIX = "api/v1/warehouse";
 
-export const KITCHEN_API_BASE_URL = RESTAURANT_ORDER_SYSTEM_DOMAIN
-  ? `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`
-  : `http://localhost:8080/${KITCHEN_API_PATH_SUFFIX}`;
+export const KITCHEN_API_BASE_URL =
+  env === "production"
+    ? `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`
+    : `http://kitchen-service:${KITCHEN_PORT_SERVICE}/${KITCHEN_API_PATH_SUFFIX}`;
 
 export const MARKET_API_BASE_URL =
   "https://recruitment.alegra.com/api/farmers-market/buy";

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import { Row, Col, Button, Alert } from "react-bootstrap";
+import OrderButton from "./components/Buttons/OrderButton.jsx";
 import RestaurtantMenu from "./components/Lists/RestaurtantMenu.jsx";
 
 import Layout from "./components/Layout.jsx";
@@ -8,17 +9,13 @@ import Layout from "./components/Layout.jsx";
 const App = () => {
   return (
     <Layout>
-      <Row className="align-items-strech justify-content-start">
+      <Row className="align-items-strech justify-content-start gx-5">
         <Col sm={12} md={6}>
           {" "}
-          <h5 className="fw-bold mb-0">Restaurant Order System</h5>
-          <p> Order a random dish</p>
-
-          <hr/>
-          <RestaurtantMenu/>
-          
-
-
+          <h5 className="fw-bold">Restaurant Order System</h5>
+          <OrderButton />
+          <hr />
+          <RestaurtantMenu />
         </Col>
         <Col sm={12} md={6}>
           {" "}
