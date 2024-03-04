@@ -16,7 +16,6 @@ const sendOrderToCheckIngredients = async (order) => {
       `Failed to send order to '${INGREDIENTS_CHECK_QUEUE}' queue:`,
       err
     );
-    throw err;
   }
 };
 

@@ -17,14 +17,12 @@ const buyIngredients = async (ingredients) => {
           { name: ingredient.name },
           { $inc: { available: quantitySold } }
         );
-      } catch (error) {
-        console.error("Error updating ingredient availability:", error);
-        throw error;
+      } catch (err) {
+        console.error("Error updating ingredient availability:", err);
       }
     }
-  } catch (error) {
-    console.error("Error checking ingredient availability:", error);
-    throw error;
+  } catch (err) {
+    console.error("Error checking ingredient availability:", err);
   }
 };
 

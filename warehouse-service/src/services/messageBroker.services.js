@@ -54,7 +54,6 @@ const startOrderIngredientsCheckConsumer = async () => {
       `Failed to consume messages from '${INGREDIENTS_CHECK_QUEUE}' queue:`,
       err
     );
-    throw err;
   }
 };
 
