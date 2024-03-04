@@ -1,6 +1,6 @@
 # Build Stage
 # This stage installs all dependencies and builds the project
-FROM node:16 AS build
+FROM node:18-alpine AS build
 
 # Set the working directory in the Docker container
 WORKDIR /app
