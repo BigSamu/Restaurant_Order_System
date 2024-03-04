@@ -1,0 +1,119 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load .dockerignore
+#1 transferring context: 2B done
+#1 DONE 0.0s
+
+#2 [internal] load build definition from Dockerfile
+#2 transferring dockerfile: 1.11kB done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 1.4s
+
+#4 [internal] load metadata for docker.io/library/nginx:stable-alpine
+#4 DONE 1.4s
+
+#5 [build 1/5] FROM docker.io/library/node:18-alpine@sha256:ca9f6cb0466f9638e59e0c249d335a07c867cd50c429b5c7830dda1bed584649
+#5 DONE 0.0s
+
+#6 [serve 1/3] FROM docker.io/library/nginx:stable-alpine@sha256:6845649eadc1f0a5dacaf5bb3f01b480ce200ae1249114be11fef9d389196eaf
+#6 DONE 0.0s
+
+#7 [internal] load build context
+#7 transferring context: 964.27kB 0.9s done
+#7 DONE 1.0s
+
+#8 [build 2/5] WORKDIR /app
+#8 CACHED
+
+#9 [build 3/5] COPY . .
+#9 DONE 3.8s
+
+#10 [build 4/5] RUN npm install
+#10 5.686 
+#10 5.686 added 3 packages, and audited 312 packages in 5s
+#10 5.687 
+#10 5.687 102 packages are looking for funding
+#10 5.687   run `npm fund` for details
+#10 5.689 
+#10 5.689 found 0 vulnerabilities
+#10 5.691 npm notice 
+#10 5.691 npm notice New minor version of npm available! 10.2.4 -> 10.5.0
+#10 5.693 npm notice Changelog: <https://github.com/npm/cli/releases/tag/v10.5.0>
+#10 5.693 npm notice Run `npm install -g npm@10.5.0` to update!
+#10 5.693 npm notice 
+#10 DONE 5.8s
+
+#11 [build 5/5] RUN npm run build
+#11 0.731 
+#11 0.731 > order-management-ui@1.0.0 build
+#11 0.731 > vite build
+#11 0.731 
+#11 0.985 {
+#11 0.985   npm_config_user_agent: 'npm/10.2.4 node/v18.19.1 linux x64 workspaces/false',
+#11 0.985   NODE_VERSION: '18.19.1',
+#11 0.985   YARN_VERSION: '1.22.19',
+#11 0.985   npm_node_execpath: '/usr/local/bin/node',
+#11 0.985   SHLVL: '2',
+#11 0.985   npm_config_noproxy: '',
+#11 0.985   HOME: '/root',
+#11 0.985   npm_package_json: '/app/package.json',
+#11 0.985   npm_config_userconfig: '/root/.npmrc',
+#11 0.985   npm_config_local_prefix: '/app',
+#11 0.985   COLOR: '0',
+#11 0.985   VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN: '15.229.232.201',
+#11 0.985   npm_config_prefix: '/usr/local',
+#11 0.985   npm_config_npm_version: '10.2.4',
+#11 0.985   npm_config_cache: '/root/.npm',
+#11 0.985   npm_config_node_gyp: '/usr/local/lib/node_modules/npm/node_modules/node-gyp/bin/node-gyp.js',
+#11 0.985   PATH: '/app/node_modules/.bin:/node_modules/.bin:/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/lib/node-gyp-bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin',
+#11 0.985   NODE: '/usr/local/bin/node',
+#11 0.985   npm_package_name: 'order-management-ui',
+#11 0.985   npm_lifecycle_script: 'vite build',
+#11 0.985   npm_package_version: '1.0.0',
+#11 0.985   npm_lifecycle_event: 'build',
+#11 0.985   npm_config_globalconfig: '/usr/local/etc/npmrc',
+#11 0.985   npm_config_init_module: '/root/.npm-init.js',
+#11 0.985   PWD: '/app',
+#11 0.985   npm_execpath: '/usr/local/lib/node_modules/npm/bin/npm-cli.js',
+#11 0.985   npm_config_global_prefix: '/usr/local',
+#11 0.985   npm_command: 'run-script',
+#11 0.985   INIT_CWD: '/app',
+#11 0.985   EDITOR: 'vi',
+#11 0.985   NODE_ENV: 'production'
+#11 0.985 }
+#11 1.016 vite v5.1.4 building for production...
+#11 1.087 transforming...
+#11 3.080 src/components/Layout.jsx (1:0) Error when using sourcemap for reporting an error: Can't resolve original location of error.
+#11 5.787 ✓ 393 modules transformed.
+#11 7.180 rendering chunks...
+#11 7.247 computing gzip size...
+#11 7.331 dist/index.html                                  0.47 kB │ gzip:  0.30 kB
+#11 7.331 dist/assets/fa-v4compatibility-aR9vOKaP.woff2    4.79 kB
+#11 7.331 dist/assets/fa-v4compatibility-F0dlVTLQ.ttf     10.83 kB
+#11 7.331 dist/assets/fa-regular-400-OOsPf1xj.woff2       25.45 kB
+#11 7.331 dist/assets/fa-regular-400-BMFokQJ2.ttf         68.00 kB
+#11 7.331 dist/assets/fa-brands-400-C99Yv4gD.woff2       117.37 kB
+#11 7.331 dist/assets/fa-solid-900-DAI24fNt.woff2        156.50 kB
+#11 7.331 dist/assets/fa-brands-400-DtZKBM2a.ttf         207.97 kB
+#11 7.332 dist/assets/fa-solid-900-DM0teJdg.ttf          419.72 kB
+#11 7.332 dist/assets/index-vndhJ7VR.css                 327.41 kB │ gzip: 54.08 kB
+#11 7.333 dist/assets/index-DcXuPb3-.js                  293.99 kB │ gzip: 96.07 kB
+#11 7.333 ✓ built in 6.29s
+#11 DONE 7.4s
+
+#12 [serve 2/3] COPY --from=build /app/dist /usr/share/nginx/html
+#12 CACHED
+
+#13 [serve 3/3] COPY nginx.conf /etc/nginx/conf.d/default.conf
+#13 CACHED
+
+#14 exporting to image
+#14 exporting layers done
+#14 writing image sha256:a547d8c6276fb5472152dd0e1954a3b09f60aa53e3db90a45632d659f4b9f2fc 0.1s done
+#14 naming to docker.io/library/my-vite-app 0.0s done
+#14 DONE 0.1s
+
+What's Next?
+  View a summary of image vulnerabilities and recommendations → docker scout quickview
