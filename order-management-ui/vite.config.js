@@ -10,7 +10,7 @@ const env = process.env.NODE_ENV || "development";
 // Manually specify the path to the external .env file
 const envPath = path.resolve(process.cwd(), `../.env.${env}`);
 
-console.log(envPath)
+console.log(process.env.RESTAURANT_ORDER_SYSTEM_DOMAIN)
 
 // Load environment variables from the corresponding .env file
 dotenv.config({ path: envPath });
