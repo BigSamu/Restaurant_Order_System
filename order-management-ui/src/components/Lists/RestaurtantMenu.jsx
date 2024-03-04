@@ -13,7 +13,6 @@ const RestaurtantMenu = () => {
   const getAllRecipes = async () => {
     try {
       const menuAvailable = await kitchenService.getAllRecipes();
-      console.log(menuAvailable);
       setRecipes(menuAvailable);
     } catch (error) {
       console.error(error);
