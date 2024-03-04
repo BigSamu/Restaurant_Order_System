@@ -24,6 +24,8 @@ export const {
   INGREDIENTS_CHECK_QUEUE,
 } = process.env;
 
+console.log(RESTAURANT_ORDER_SYSTEM_DOMAIN);
+
 export const KITCHEN_PORT_SERVICE = 8080;
 export const WAREHOUSE_PORT_SERVICE = 8081;
 

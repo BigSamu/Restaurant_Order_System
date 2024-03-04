@@ -5,7 +5,6 @@ while [[ "$#" -gt 0 ]]; do
     case $1 in
         --dev) env_file=".env.development";;
         --prod)
-            env_file=".env.production"
             compose_file="docker-compose.prod.yml"
             ;;
         *) echo "Unknown parameter passed: $1"; exit 1 ;;
@@ -18,4 +17,4 @@ if [ -z "$env_file" ]; then
     exit 1
 fi
 
-docker compose -f $compose_file --env-file $env_file up --build --force-recreate
+docker compose -f $compose_file  up --build --force-recreate

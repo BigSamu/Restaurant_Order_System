@@ -30,20 +30,6 @@ services:
       RABBITMQ_DEFAULT_USER: ${MESSAGE_BROKER_USER}
       RABBITMQ_DEFAULT_PASS: ${MESSAGE_BROKER_PASSWORD}
 
-  order-management-ui:
-    restart: always
-    build:
-      context: ./order-management-ui
-      dockerfile: Dockerfile.dev
-      args:
-        VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN: ${VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN}
-    ports:
-      - "3000:3000" # Map port 3000 of the container to port 80 on the host
-    volumes:
-      - ./order-management-ui:/app
-      - /app/node_modules
-    command: npm run dev
-
   kitchen-service:
     restart: always
     build:
@@ -51,19 +37,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080" # Map port 8080 of the container to port 8080 on the host
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - RESTAURANT_ORDER_SYSTEM_DOMAIN=${RESTAURANT_ORDER_SYSTEM_DOMAIN}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - MESSAGE_BROKER_USER=${MESSAGE_BROKER_USER}
-      - MESSAGE_BROKER_PASSWORD=${MESSAGE_BROKER_PASSWORD}
-      - MESSAGE_BROKER_HOST=${MESSAGE_BROKER_HOST}
-      - MESSAGE_BROKER_PORT=${MESSAGE_BROKER_PORT}
-      - INGREDIENTS_CHECK_QUEUE=${INGREDIENTS_CHECK_QUEUE}
+    env_file:
+      - ./.env.development
     volumes:
       - ./kitchen-service:/app
     command: npm run dev
@@ -80,19 +55,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8081:8081" # Map port 8080 of the container to port 8081 on the host
-    environment:
-      - NODE_ENV=${NODE_ENV}
-      - RESTAURANT_ORDER_SYSTEM_DOMAIN=${RESTAURANT_ORDER_SYSTEM_DOMAIN}
-      - DATABASE_USER=${DATABASE_USER}
-      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
-      - DATABASE_HOST=${DATABASE_HOST}
-      - DATABASE_PORT=${DATABASE_PORT}
-      - DATABASE_NAME=${DATABASE_NAME}
-      - MESSAGE_BROKER_USER=${MESSAGE_BROKER_USER}
-      - MESSAGE_BROKER_PASSWORD=${MESSAGE_BROKER_PASSWORD}
-      - MESSAGE_BROKER_HOST=${MESSAGE_BROKER_HOST}
-      - MESSAGE_BROKER_PORT=${MESSAGE_BROKER_PORT}
-      - INGREDIENTS_CHECK_QUEUE=${INGREDIENTS_CHECK_QUEUE}
+    env_file:
+      - ./.env.development
     volumes:
       - ./warehouse-service:/app
     command: npm run dev
@@ -100,6 +64,25 @@ services:
       rabbitmq:
         condition: service_healthy
       mongo:
+        condition: service_started
+        
+  order-management-ui:
+    restart: always
+    build:
+      context: ./order-management-ui
+      dockerfile: Dockerfile.dev
+      args:
+        VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN: ${VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN}
+    ports:
+      - "3000:3000" # Map port 3000 of the container to port 80 on the host
+    volumes:
+      - ./order-management-ui:/app
+      - /app/node_modules
+    command: npm run dev
+    depends_on:
+      kitchen-service:
+        condition: service_started
+      warehouse-service:
         condition: service_started
 
 volumes:
