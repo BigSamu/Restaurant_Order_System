@@ -32,7 +32,7 @@ services:
     ports:
       - "80:80" # Map port 3000 of the container to port 80 on the host
     environment:
-      - NODE_ENV=${NODE_ENV}
+      - RESTAURANT_ORDER_SYSTEM_DOMAIN=${RESTAURANT_ORDER_SYSTEM_DOMAIN}
 
   kitchen-service:
     restart: always
@@ -64,7 +64,7 @@ services:
       context: ./warehouse-service
       dockerfile: Dockerfile
     ports:
-      - "8081:8080" # Map port 8080 of the container to port 8081 on the host
+      - "8081:8081" # Map port 8080 of the container to port 8081 on the host
     environment:
       - NODE_ENV=${NODE_ENV}
       - DATABASE_USER=${DATABASE_USER}
