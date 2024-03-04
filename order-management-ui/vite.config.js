@@ -23,6 +23,8 @@ const viteEnvVariables = Object.entries(process.env).reduce((acc, [key, value]) 
   return acc;
 }, {});
 
+
+
 // https://vitejs.dev/config/
 export default defineConfig({
   server:{
