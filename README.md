@@ -11,7 +11,6 @@
 [![Watchers][watchers-badge]][watchers-url]
 [![Ask Me Anything][ama-badge]][ama-url]
 [![Say Thanks!][say-thanks-badge]][say-thanks-url]
-
 [![Gmail Small][gmail-badge-small]][gmail-url]
 [![LinkedIn Small][linkedin-badge-small]][linkedin-url]
 [![Hackerrank Small][hackerrank-badge-small]][linkedin-url]
@@ -21,6 +20,7 @@
 <!-- *********************************************************************** -->
 
 <!-- omit in toc -->
+
 # Restaurant Order System
 
 A demo of a restaurant order system,
@@ -36,9 +36,11 @@ Demo available in following [link](http://15.229.232.201/)
 <!-- *********************************************************************** -->
 
 <!-- omit in toc -->
+
 ## Table of Contents
 
-- [Macaroons Demo](#macaroons-demo)
+- [Restaurant Order System](#restaurant-order-system)
+  - [Table of Contents](#table-of-contents)
   - [About The Project](#about-the-project)
   - [Technologies](#technologies)
   - [Getting Started](#getting-started)
@@ -52,8 +54,6 @@ Demo available in following [link](http://15.229.232.201/)
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
-
-# Macaroons Demo
 
 <!-- *********************************************************************** -->
 <!-- I) ABOUT THE PROJECT -->
@@ -76,17 +76,27 @@ Here's a demo highlighting the use of these tokens for authorization and delegat
 The following technologies are used for the implementation of this project:
 
 [![HTML5][html5-badge]][html5-url]
-[![Python][python-badge]][python-url]
 [![Javascript][javascript-badge]][javascript-url]
-[![NodeJS][node-js-badge]][node-js-url]
+[![Node][node-badge]][node-url]
 [![NPM][npm-badge]][npm-url]
-[![PyPi][pypi-badge]][pypi-url]
-[![ReactJS][react-js-badge]][react-js-url]
+[![React][react-badge]][react-url]
+[![Vite][vite-badge]][vite-url]
 [![Bootstrap][bootstrap-badge]][bootstrap-url]
-[![FastAPI][fastapi-badge]][fastapi-url]
-[![SQLite][sqlite-badge]][sqlite-url]
-[![PostgreSQL][postgresql-badge]][postgresql-url]
-[![Vercel][vercel-badge]][vercel-url]
+[![ExpressJ][express-badge]][express-url]
+[![Webpack][webpack-badge]][webpack-url]
+[![Babel][babel-badge]][babel-url]
+[![Mongo][mongodb-badge]][mongodb-url]
+[![RabbitMQ][rabbitmq-badge]][rabbitmq-url]
+[![Docker][docker-badge]][docker-url]
+[![SocketIO][socket-io-badge]][socket-io-url]
+[![Nginx][nginx-badge]][nginx-url]
+
+Plus these platforms and tools for the development and deployment process:
+
+[![VSCode][vscode-badge]][vscode-url]
+[![Postman][postman-badge]][postman-url]
+[![Github][github-badge]][github-url]
+[![AWS][aws-badge]][aws-url]
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -262,8 +272,8 @@ Developed with ❤️ in Chile 🇨🇱
 
 <!-- ReactJS -->
 
-[react-js-badge]: https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge
-[react-js-url]: https://reactjs.org/
+[react-badge]: https://img.shields.io/badge/React-61DAFB?logo=react&logoColor=000&style=for-the-badge
+[react-url]: https://reactjs.org/
 
 <!-- Bootstrap -->
 
@@ -303,28 +313,47 @@ Developed with ❤️ in Chile 🇨🇱
 
 <!-- ExpressJS -->
 
-[express-js-badge]: https://img.shields.io/badge/Express-000?logo=express&logoColor=fff&style=for-the-badge
-[express-js-url]: https://expressjs.com/
+[express-badge]: https://img.shields.io/badge/Express-000?logo=express&logoColor=fff&style=for-the-badge
+[express-url]: https://expressjs.com/
 
-<!-- 4) Databases -->
+<!-- SocketIO -->
+
+[socket-io-badge]: https://img.shields.io/badge/Socket.io-010101?logo=socketdotio&logoColor=fff&style=for-the-badge
+[socket-io-url]: https://socket.io/
+
+<!-- Mongoose -->
+
+[mongoose-badge]: https://img.shields.io/badge/Mongoose-800?logo=mongoose&logoColor=fff&style=for-the-badge
+[mongoose-url]: https://mongoosejs.com/
+
+<!-- 4) Databases, Message Brokers, Caching Services, etc -->
 
 <!-- SQLite -->
 
 [sqlite-badge]: https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=fff&style=for-the-badge
 [sqlite-url]: https://sqlite.org/
+
+<!-- Postgresql -->
+
 [postgresql-badge]: https://img.shields.io/badge/PostgreSQL-4169E1?logo=postgresql&logoColor=fff&style=for-the-badge
 [postgresql-url]: https://www.postgresql.org/
+
+<!-- Mongo -->
+
 [mongodb-badge]: https://img.shields.io/badge/MongoDB-47A248?logo=mongodb&logoColor=fff&style=for-the-badge
 [mongodb-url]: https://www.mongodb.com/
-[mongoose-badge]: https://img.shields.io/badge/Mongoose-800?logo=mongoose&logoColor=fff&style=for-the-badge
-[mongoose-url]: https://mongoosejs.com/
 
-<!-- 5) Development Environments & Package Managers -->
+<!-- RabbitMQ -->
+
+[rabbitmq-badge]:https://img.shields.io/badge/RabbitMQ-F60?logo=rabbitmq&logoColor=fff&style=for-the-badge
+[rabbitmq-url]:https://www.rabbitmq.com/
+
+<!-- 5) Development Environments and Package Managers -->
 
 <!-- NodeJS -->
 
-[node-js-badge]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
-[node-js-url]: https://nodejs.org/
+[node-badge]: https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white
+[node-url]: https://nodejs.org/
 
 <!-- NPM -->
 
@@ -341,12 +370,32 @@ Developed with ❤️ in Chile 🇨🇱
 [pypi-badge]: https://img.shields.io/badge/PyPI-3775A9?logo=pypi&logoColor=fff&style=for-the-badge
 [pypi-url]: https://pypi.org/
 
-<!-- Deployment Platforms and Technologies -->
+<!-- 6) Tooling (Bundlers, Plugins, Transpilers, etc) -->
 
+<!-- Vite -->
+
+[vite-badge]: https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff&style=for-the-badge
+[vite-url]: https://vitejs.dev/
+
+[webpack-badge]: https://img.shields.io/badge/Webpack-8DD6F9?logo=webpack&logoColor=000&style=for-the-badge
+[webpack-url]: https://webpack.js.org/
+
+[babel-badge]:https://img.shields.io/badge/Babel-F9DC3E?logo=babel&logoColor=000&style=for-the-badge
+[babel-url]: https://babeljs.io/
+
+
+<!-- 7) DevOps and Cloud -->
+
+[aws-badge]: https://img.shields.io/badge/Amazon%20AWS-232F3E?logo=amazonaws&logoColor=fff&style=for-the-badge
+[aws-url]: https://aws.amazon.com/
+[docker-badge]: https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff&style=for-the-badge
+[docker-url]: https://www.docker.com/
 [vercel-badge]: https://img.shields.io/badge/Vercel-000?logo=vercel&logoColor=fff&style=for-the-badge
 [vercel-url]: https://vercel.com/
+[nginx-badge]: https://img.shields.io/badge/NGINX-009639?logo=nginx&logoColor=fff&style=for-the-badge
+[nginx-url]: https://www.nginx.com/
 
-<!-- 7) Platforms and Tools -->
+<!-- 8) Platforms and External Tools -->
 
 [vscode-badge]: https://img.shields.io/badge/Visual%20Studio%20Code-007ACC?logo=visualstudiocode&logoColor=fff&style=for-the-badge
 [vscode-url]: https://code.visualstudio.com/
@@ -446,7 +495,7 @@ Developed with ❤️ in Chile 🇨🇱
 
 <!-- Node.js and NPM -->
 
-[install-node-js-and-npm-url]: https://gist.github.com/MichaelCurrin/aa1fc56419a355972b96bce23f3bccba
+[install-node-and-npm-url]: https://gist.github.com/MichaelCurrin/aa1fc56419a355972b96bce23f3bccba
 
 <!-- Ruby, Rubygems and Bundler -->
 
