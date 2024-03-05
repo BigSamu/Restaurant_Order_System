@@ -23,7 +23,7 @@
 
 # Restaurant Order System
 
-A demo of a restaurant order system,
+A simple microservice application for a restaurant management system. Implemented with React, Vite, Express, Docker, RabbitMQ and SocketIO.
 
 Demo available in following [link](http://15.229.232.201/)
 
@@ -61,9 +61,9 @@ Demo available in following [link](http://15.229.232.201/)
 
 ## About The Project
 
-Have you ever wondered how cloud storage services like Google Drive or Microsoft OneDrive enable users to share files and resources with others while also managing permissions such as editing or viewing rights? These platforms often utilize advanced authorization mechanisms to control access, ensuring security and flexibility. How exactly do they achieve this intricate balance? Introducing macaroon tokens,a [Google invention credential](https://storage.googleapis.com/pub-tools-public-publication-data/pdf/41892.pdf) that incorporates contextual caveats for decentralized authorization and delegation!
+This project is a demo for a microservice-based restaurant management system 🍽️, designed to address the unique challenge of serving random free meals 🎉 during a special event. Utilizing a tech stack that includes React, Vite, Express, Docker, RabbitMQ, and SocketIO, it automates the flow from a manager's meal request 📋 to a kitchen 🧑‍🍳 and warehouse 🏭 service  (i.e. ingredients retrieval and meal preparation, respectively). To handle mass orders efficiently 🚀, the design incorporates a solution with message broker services 📬 (i.e. RabbitMQ), facilitating asynchronous processing and communication between the kitchen and warehouse services. The system features automated recipe selection based on available ingredients 🥦🍅, real-time order tracking 📊, and seamless inventory management 📦, including automatic replenishment from a market API when stocks are low. It showcases how technology can streamline restaurant operations, handle mass orders efficiently, and maintain inventory, all within a flexible microservices architecture 🏗️.
 
-Here's a demo highlighting the use of these tokens for authorization and delegation in decentralized environments implementing the use of first-party caveats and is built with NextJS and FastAPI frameworks. It's a great resource for tech enthusiasts keen on understanding this unique approach in a succinct and insightful manner.
+<p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
 ---
 
