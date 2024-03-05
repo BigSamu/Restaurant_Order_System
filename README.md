@@ -48,8 +48,6 @@ Demo available in following [link](http://15.229.232.201/)
     - [Installation](#installation)
     - [Usage](#usage)
   - [Contact Me](#contact-me)
-  - [Support](#support)
-  - [License](#license)
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -61,7 +59,7 @@ Demo available in following [link](http://15.229.232.201/)
 
 ## About The Project
 
-This project is a demo for a microservice-based restaurant management system 🍽️, designed to address the unique challenge of serving random free meals 🎉 during a special event. Utilizing a tech stack that includes React, Vite, Express, Docker, RabbitMQ, and SocketIO, it automates the flow from a manager's meal request 📋 to a kitchen 🧑‍🍳 and warehouse 🏭 service  (i.e. ingredients retrieval and meal preparation, respectively). To handle mass orders efficiently 🚀, the design incorporates a solution with message broker services 📬 (i.e. RabbitMQ), facilitating asynchronous processing and communication between the kitchen and warehouse services. The system features automated recipe selection based on available ingredients 🥦🍅, real-time order tracking 📊, and seamless inventory management 📦, including automatic replenishment from a market API when stocks are low. It showcases how technology can streamline restaurant operations, handle mass orders efficiently, and maintain inventory, all within a flexible microservices architecture 🏗️.
+This project is a demo for a microservice-based restaurant management system 🍽️, designed to address the unique challenge of serving random free meals 🎉 during a special event. Utilizing a tech stack that includes React, Vite, Express, Docker, RabbitMQ, and SocketIO, it automates the flow from a manager's meal request 📋 to a kitchen 🧑‍🍳 and warehouse 🏭 service (i.e. ingredients retrieval and meal preparation, respectively). To handle mass orders efficiently 🚀, the design incorporates a solution with message broker services 📬 (i.e. RabbitMQ), facilitating asynchronous processing and communication between the kitchen and warehouse services. The system features automated recipe selection based on available ingredients 🥦🍅, real-time order tracking 📊, and seamless inventory management 📦, including automatic replenishment from a market API when stocks are low. It showcases how technology can streamline restaurant operations, handle mass orders efficiently, and maintain inventory, all within a flexible microservices architecture 🏗️.
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -121,7 +119,6 @@ For the setup of this web application, the following prerequisites are required
 
 For easy management of Node.js environments, [Node Version Manager (NVM)](https://github.com/nvm-sh/nvm#readme) tool is recommended.
 
-
 <!-- 3.2) Installation -->
 <!-- ----------------------------------------------------------------------- -->
 
@@ -131,28 +128,31 @@ To get a copy of this project and run it in your local environment, follow the s
 
 1. Clone the repo
    ```sh
-   git clone git@github.com:BigSamu/Macaroons_Demo.git
+   git clone https://github.com/BigSamu/Restaurant_Order_System
    ```
 2. Go into the repository
-   ```sh
-   cd Macaroons_Demo
-   ```
-3. Install required pyhon packages or dependencies
-   ```sh
-   npm install
-   ```
-4. Create a .env file and update the enviromental variables that don't have values. Use as reference the `env.example`. For development, the enviromental variables that required an update are the following:
 
-   ```
-   NEXT_PUBLIC_CLIENT_DOMAIN_URL_PRODUCTION="<your-vercel-domain>"
-   ENVIRONMENT = "<development-or-production>" # Change for "development" for this case
-   MACAROON_SECRET_KEY="<your-very-strong-secret-key>"
+   ```sh
+   cd Restaurant_Order_System
    ```
 
-5. Run appplication. Python packages will be installed automatically, because a script command has specifications for that.
-   ```sh
-   npm run dev
-   ```
+3. Create a .env.development file and update the enviroment variables that don't have values. Use as reference the `env.sample`. The env variables that required an update are the following:
+
+```
+NODE_ENV="development-or-production" # Change for "development" for this case
+RESTAURANT_ORDER_SYSTEM_DOMAIN="<your-domain>"  # Change for "localhost" for this case
+VITE_RESTAURANT_ORDER_SYSTEM_DOMAIN="your-domain" # Change for "localhost" for this case
+
+DATABASE_USER="your-database-user" # mongo database user
+DATABASE_PASSWORD="your-database-password" # mongo database password
+DATABASE_NAME="your-database-name" # mongo database name
+```
+
+4. Run docker using the following script
+
+```sh
+./run.sh --dev
+```
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -162,7 +162,7 @@ To get a copy of this project and run it in your local environment, follow the s
 
 ### Usage
 
-After succesfull installation, you will be able to check the WebApp in any browser by visiting the following URL address: [http://localhost:3000](http://localhost:3000)
+After successful installation, you will be able to check the WebApp in any browser by visiting the following URL address: [http://localhost:3000](http://localhost:3000)
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -174,7 +174,6 @@ After succesfull installation, you will be able to check the WebApp in any brows
 
 <!-- ## Acknowledgements
 
-lipsum
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
@@ -203,7 +202,7 @@ Samuel Valdes Gutierrez
 <!-- VI) SUPPORT -->
 <!-- *********************************************************************** -->
 
-## Support
+<!-- ## Support
 
 Whether you use this work to learn something or if you just like my work, please 🙏 consider supporting it. This aid will help me to dedicate more time to create and developed well design open-source projects.
 
@@ -211,13 +210,13 @@ Whether you use this work to learn something or if you just like my work, please
 [![Ko-Fi][ko-fi-badge]][ko-fi-url]
 [![BuyMeACoffe][buy-me-a-coffee-badge]][buy-me-a-coffee-url]
 
-<p align="right">(<a href="#back-to-top">back to top</a>)</p>
+<p align="right">(<a href="#back-to-top">back to top</a>)</p> -->
 
 <!-- *********************************************************************** -->
 <!-- VII) LICENSE -->
 <!-- *********************************************************************** -->
 
----
+<!-- ---
 
 ## License
 
@@ -227,7 +226,7 @@ This project is licensed under the terms of the MIT license.
 
 <p align="right">(<a href="#back-to-top">back to top</a>)</p>
 
----
+--- -->
 
 <!-- *********************************************************************** -->
 <!-- VIII) FOOTER -->
@@ -344,8 +343,8 @@ Developed with ❤️ in Chile 🇨🇱
 
 <!-- RabbitMQ -->
 
-[rabbitmq-badge]:https://img.shields.io/badge/RabbitMQ-F60?logo=rabbitmq&logoColor=fff&style=for-the-badge
-[rabbitmq-url]:https://www.rabbitmq.com/
+[rabbitmq-badge]: https://img.shields.io/badge/RabbitMQ-F60?logo=rabbitmq&logoColor=fff&style=for-the-badge
+[rabbitmq-url]: https://www.rabbitmq.com/
 
 <!-- 5) Development Environments and Package Managers -->
 
@@ -375,13 +374,10 @@ Developed with ❤️ in Chile 🇨🇱
 
 [vite-badge]: https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=fff&style=for-the-badge
 [vite-url]: https://vitejs.dev/
-
 [webpack-badge]: https://img.shields.io/badge/Webpack-8DD6F9?logo=webpack&logoColor=000&style=for-the-badge
 [webpack-url]: https://webpack.js.org/
-
-[babel-badge]:https://img.shields.io/badge/Babel-F9DC3E?logo=babel&logoColor=000&style=for-the-badge
+[babel-badge]: https://img.shields.io/badge/Babel-F9DC3E?logo=babel&logoColor=000&style=for-the-badge
 [babel-url]: https://babeljs.io/
-
 
 <!-- 7) DevOps and Cloud -->
 
