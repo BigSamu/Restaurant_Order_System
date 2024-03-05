@@ -116,12 +116,11 @@ Plus these platforms and tools for the development and deployment process:
 
 For the setup of this web application, the following prerequisites are required
 
-- Frontend: `Node.js 18.7.0` or greater and `(Node Package Manager) NPM`.
-- Backend: `Python 3.9` or greater and `pip3`.
+- `Node.js` or greater and `(Node Package Manager) NPM`.
+- `Docker`
 
-For easy management of Node.js environments, [Node Version Manager (NVM)](https://github.com/nvm-sh/nvm#readme) tool is recommended. Check installation instructions in website.
+For easy management of Node.js environments, [Node Version Manager (NVM)](https://github.com/nvm-sh/nvm#readme) tool is recommended.
 
-> **NOTE:** At the time of the implementation of this project, `Node.js v18.17.1`, `NPM 9.6.7` `Python v3.10.11`, `pip v23.2.1` were used.
 
 <!-- 3.2) Installation -->
 <!-- ----------------------------------------------------------------------- -->
