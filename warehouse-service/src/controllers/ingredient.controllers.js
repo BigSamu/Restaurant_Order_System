@@ -12,7 +12,7 @@ const getAll = async (req, res) => {
   }
 };
 
-const getOneById = async (req, res, next) => {
+const getOneById = async (req, res) => {
   const { id } = req.params;
   if (!ObjectId.isValid(id))
     return res

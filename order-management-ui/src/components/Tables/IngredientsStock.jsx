@@ -4,18 +4,18 @@ import { Table } from "react-bootstrap";
 
 import { kitchenService } from "../../services/index.js";
 import io from "socket.io-client";
-import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from "../../config/index.js";
+import { KITCHEN_SERVICE_DOMAIN, WAREHOUSE_SERVICE_DOMAIN } from "../../config/index.js";
 
 const IngredientsStock = () => {
   const [ingredients, setIngredients] = useState([]);
   const [ioKitchen] = useState(() =>
-    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}`, {
+    io(`${KITCHEN_SERVICE_DOMAIN}`, {
       path: "/socket.io/kitchen/",
     })
   );
 
   const [ioWarehouse] = useState(() =>
-    io(`http://localhost:80`, {
+    io(`${WAREHOUSE_SERVICE_DOMAIN}`, {
       path: "/socket.io/warehouse/",
     })
   );

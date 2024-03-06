@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from '../config/index.js';
+import { KITCHEN_API_BASE_URL } from '../config/index.js';
 
-const baseService = (options = {}) => {
+const kitchenBaseService = (options = {}) => {
   const { headers = {}, params = {} } = options;
   const baseServiceDefault = axios.create({
-    baseURL: `${RESTAURANT_ORDER_SYSTEM_DOMAIN}`,
+    baseURL: `${KITCHEN_API_BASE_URL}`,
     headers: {
       'Content-Type': 'application/json',
       ...headers,
@@ -27,4 +27,4 @@ const baseService = (options = {}) => {
   return baseServiceDefault;
 };
 
-export { baseService };
+export { kitchenBaseService };

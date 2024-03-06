@@ -4,12 +4,12 @@ import { useOrderContext } from "../../contexts/OrderContext.jsx";
 import { ListGroup, Alert } from "react-bootstrap";
 
 import io from "socket.io-client";
-import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from "../../config/index.js";
+import { KITCHEN_SERVICE_DOMAIN } from "../../config/index.js";
 
 const OrdersQueue = () => {
   const { currentOrders, setCurrentOrders } = useOrderContext();
   const [ioKitchen] = useState(() =>
-    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}`, {
+    io(`${KITCHEN_SERVICE_DOMAIN}`, {
       path: "/socket.io/kitchen/",
     })
   );
