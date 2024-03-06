@@ -5,7 +5,7 @@
 <!-- *********************************************************************** -->
 
 [![Github Follow][github-follow-badge]][github-follow-url]
-[![License][license-badge]][license-url]
+<!-- [![License][license-badge]][license-url] -->
 [![Forks][forks-badge]][forks-url]
 [![Stars][stars-badge]][stars-url]
 [![Watchers][watchers-badge]][watchers-url]
@@ -28,7 +28,7 @@ A simple microservice application for a restaurant management system. Implemente
 Demo available in following [link](http://15.229.232.201/)
 
 <p align="left">
-  <img src="order-management-ui/public/demos/demo_video.gif" alt="demo_video" width="75%"/>
+  <img src="order-management-ui/public/demos/demo_video.gif" alt="demo_video"/>
 </p
 
 <!-- *********************************************************************** -->
