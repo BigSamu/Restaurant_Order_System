@@ -34,7 +34,7 @@ const OrdersAndMarketHistory = () => {
   };
 
   return (
-    <div >
+    <div>
       <Button
         variant="secondary"
         size="sm"
@@ -59,7 +59,7 @@ const OrdersAndMarketHistory = () => {
                 {ordersLogs &&
                   ordersLogs.map((item, idx) => (
                     <p className="m-0" key={idx}>
-                      {item}
+                      <small>{item}</small>
                     </p>
                   ))}
               </div>
@@ -70,7 +70,7 @@ const OrdersAndMarketHistory = () => {
                 {marketLogs &&
                   marketLogs.map((item, idx) => (
                     <p className="m-0" key={idx}>
-                      {item}
+                      <small>{item}</small>
                     </p>
                   ))}
               </div>
