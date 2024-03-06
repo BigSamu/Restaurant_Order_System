@@ -7,20 +7,19 @@ export const setupSocketConnection = (httpServer, corsOptions) => {
   if (ioConnection) return ioConnection;
   const io = new SocketIO(httpServer, {
     cors: corsOptions,
+    path: "/socket.io/warehouse/",
   });
 
-  console.log("Setting up Socket.IO connection...")
   // Socket.IO connection setup
-  const ioWarehouse = io.of("/warehouse");
-  ioWarehouse.on("connection", (socket) => {
+  console.log("Setting up Socket.IO connection...");
+  io.on("connection", (socket) => {
     console.log(`Socket connection setup with ID ${socket.id}`);
 
-    ioWarehouse.on("disconnect", () => {
+    io.on("disconnect", () => {
       console.log(`Socket connection with ID ${socket.id} disconnected`);
     });
   });
-  console.log(ioConnection)
-  ioConnection = ioWarehouse;
+  ioConnection = io;
 };
 
 export const getSocketConnection = () => {

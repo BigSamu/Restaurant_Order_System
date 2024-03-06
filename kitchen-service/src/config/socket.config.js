@@ -8,19 +8,20 @@ export const setupSocketConnection = (httpServer, corsOptions) => {
 
   const io = new SocketIO(httpServer, {
     cors: corsOptions,
+    path: "/socket.io/kitchen/",
   });
 
   // Socket.IO connection setup
-  const ioKitchen = io.of("/kitchen");
-  ioKitchen.on("connection", (socket) => {
+  console.log("Setting up Socket.IO connection...");
+  io.on("connection", (socket) => {
     console.log(`Socket connection setup with ID ${socket.id}`);
 
-    ioKitchen.on("disconnect", () => {
+    io.on("disconnect", () => {
       console.log(`Socket connection with ID ${socket.id} disconnected`);
     });
   });
 
-  ioConnection = ioKitchen;
+  ioConnection = io;
 };
 
 export const getSocketConnection = () => {

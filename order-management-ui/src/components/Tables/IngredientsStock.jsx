@@ -9,10 +9,16 @@ import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from "../../config/index.js";
 const IngredientsStock = () => {
   const [ingredients, setIngredients] = useState([]);
   const [ioKitchen] = useState(() =>
-    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}/kitchen`)
+    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}`, {
+      path: "/socket.io/kitchen/",
+    })
   );
 
-  const [ioWarehouse] = useState(() => io(`http://localhost:8081/warehouse`));
+  const [ioWarehouse] = useState(() =>
+    io(`http://localhost:80`, {
+      path: "/socket.io/warehouse/",
+    })
+  );
 
   useEffect(() => {
     getAllIngredients();

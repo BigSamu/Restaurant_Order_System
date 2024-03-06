@@ -9,7 +9,9 @@ import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from "../../config/index.js";
 const OrdersQueue = () => {
   const { currentOrders, setCurrentOrders } = useOrderContext();
   const [ioKitchen] = useState(() =>
-    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}/kitchen`)
+    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}`, {
+      path: "/socket.io/kitchen/",
+    })
   );
 
   useEffect(() => {
