@@ -12,12 +12,14 @@ import {
 } from "../config/constants.config.js";
 
 const startOrderIngredientsCheckConsumer = async () => {
-
   try {
     const channel = getMessageBrokerChannel();
     console.log(
       `${SERVICE_NAME} service waiting for orders in '${INGREDIENTS_CHECK_QUEUE}' queue...`
     );
+
+    await channel.prefetch(1);
+
     channel.consume(
       INGREDIENTS_CHECK_QUEUE,
       async (message) => {
@@ -52,7 +54,7 @@ const startOrderIngredientsCheckConsumer = async () => {
           console.log(
             `${SERVICE_NAME} contains enough ingredients for '${order.name}'. Sending confirmation to kitchen service...`
           );
-          kitchenService.confirmOrder(order);
+          await kitchenService.confirmOrder(order);
         }
 
         // Acknowledge message

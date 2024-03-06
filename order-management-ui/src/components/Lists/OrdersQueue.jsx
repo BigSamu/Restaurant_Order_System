@@ -17,6 +17,9 @@ const OrdersQueue = () => {
   useEffect(() => {
     ioKitchen.on("order_ready", (orderConfirmed) => {
       updateOrders(orderConfirmed);
+      setTimeout(() => {
+        updateOrdersStepTwo(orderConfirmed);
+      }, 2000);
     });
 
     return () => {
@@ -32,10 +35,6 @@ const OrdersQueue = () => {
           : order
       );
     });
-
-    setTimeout(() => {
-      updateOrdersStepTwo(orderConfirmed);
-    }, 2000); // Adjust the delay here as needed, 2000 ms = 2 second
   };
 
   const updateOrdersStepTwo = (orderConfirmed) => {
