@@ -1,0 +1,9 @@
+.modal-90w  {
+  max-width: 90% !important;
+  width: auto !important; /* Override default width */
+}
+
+.modal-90h {
+  max-height: 75vh;
+  overflow-y: auto;
+}

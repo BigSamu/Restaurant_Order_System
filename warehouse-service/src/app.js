@@ -1,6 +1,7 @@
 import express from "express";
 import cors from "cors";
 import http from "http";
+import path from "path";
 
 import {
   RESTAURANT_ORDER_SYSTEM_DOMAIN,
@@ -14,6 +15,7 @@ import {
   connectDB,
   connectMessageBroker,
   setupSocketConnection,
+  setupMarketLogger,
 } from "./config/index.js";
 import { preloadIngredients } from "./scripts/index.js";
 import { messageBrokerService } from "./services/index.js";
@@ -50,6 +52,13 @@ await messageBrokerService.startOrderIngredientsCheckConsumer();
 
 // Preload ingredients in Database
 preloadIngredients();
+
+// Set up logging for orders
+setupMarketLogger();
+
+// Serve static files from the logs directory
+app.use('/logs', express.static(path.join(process.cwd(), 'logs')));
+
 
 // Subscribe API routes
 app.use(`/${WAREHOUSE_API_PATH_SUFFIX}`, ingredientRouter);

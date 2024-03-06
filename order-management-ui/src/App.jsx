@@ -1,8 +1,9 @@
 import React from "react";
 
-import { Row, Col} from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 
 import OrderButton from "./components/Buttons/OrderButton.jsx";
+import OrdersAndMarketHistoryModal from "./components/Modals/OrdersAndMarketHistory.jsx";
 import RestaurtantMenu from "./components/Lists/RestaurtantMenu.jsx";
 import OrdersQueue from "./components/Lists/OrdersQueue.jsx";
 import IngredientsStock from "./components/Tables/IngredientsStock.jsx";
@@ -19,6 +20,7 @@ const App = () => {
           <OrderButton />
           <hr />
           <RestaurtantMenu />
+          <OrdersAndMarketHistoryModal />
         </Col>
         <Col sm={12} md={6}>
           {" "}

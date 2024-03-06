@@ -11,7 +11,12 @@ export const getMissingIngredientsForOrder = async (order) => {
       (ingredient) => ingredient.name === ingredientInWarehouseForOrder.name
     );
 
-    if (ingredientInWarehouseForOrder.available < ingredientInOrder.quantity) {
+    const enoughSuppliesInWarehouse =
+      await areEnoughSuppliesInWarehouseForIngredient(
+        ingredientInOrder.name,
+        ingredientInOrder.quantity
+      );
+    if (!enoughSuppliesInWarehouse) {
       missingIngredients.push({
         name: ingredientInOrder.name,
         required: ingredientInOrder.quantity,
@@ -29,3 +34,4 @@ export const areEnoughSuppliesInWarehouseForIngredient = async (
   const ingredientWarehouse = await Ingredient.findOne({ name: ingredient });
   return ingredientWarehouse.available >= quantity;
 };
+

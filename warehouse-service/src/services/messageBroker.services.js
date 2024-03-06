@@ -1,7 +1,7 @@
 import { Ingredient } from "../models/index.js";
 
 import { getMessageBrokerChannel } from "../config/index.js";
-import { getMissingIngredientsForOrder } from "../utils/index.js";
+import { areEnoughSuppliesInWarehouseForIngredient } from "../utils/index.js";
 import { kitchenService, marketService } from "./index.js";
 
 import { getSocketConnection } from "../config/index.js";
@@ -12,6 +12,7 @@ import {
 } from "../config/constants.config.js";
 
 const startOrderIngredientsCheckConsumer = async () => {
+
   try {
     const channel = getMessageBrokerChannel();
     console.log(
@@ -31,31 +32,31 @@ const startOrderIngredientsCheckConsumer = async () => {
           `${SERVICE_NAME} service received order for ingredients check for '${order.name}'`
         );
 
-        // Check if there are enough ingredients in the warehouse
-        let missingIngredients = await getMissingIngredientsForOrder(order);
-        const ioWarehouse = getSocketConnection();
-        while (missingIngredients.length > 0) {
+        // Go to the market to buy missing ingredients
+        let orderReady = false;
+        while (!orderReady) {
+          for (const ingredient of order.ingredients) {
+            while (
+              (await areEnoughSuppliesInWarehouseForIngredient(
+                ingredient.name,
+                ingredient.quantity
+              )) === false
+            ) {
+              console.log(
+                `${SERVICE_NAME} does not contain enough '${ingredient.name}' to prepare '${order.name}' order. Going to market to buy missing ingredients...`
+              );
+              await marketService.buyIngredient(ingredient, order);
+            }
+          }
+          orderReady = true;
           console.log(
-            `${SERVICE_NAME} does not contain enough ingredients to prepare'${order.name}' order. Missing ingredients:`
+            `${SERVICE_NAME} contains enough ingredients for '${order.name}'. Sending confirmation to kitchen service...`
           );
-          missingIngredients.forEach((ingredient) => {
-            console.log(
-              `  - ${ingredient.name} -> required: ${ingredient.required}, available: ${ingredient.available}`
-            );
-          });
-          console.log("Going to market to buy missing ingredients...");
-          // Go to the market to buy missing ingredients
-          await marketService.buyIngredients(missingIngredients);
-          missingIngredients = await getMissingIngredientsForOrder(order);
-          ioWarehouse.emit("ingredients_purchased", await Ingredient.find());
+          kitchenService.confirmOrder(order);
         }
 
         // Acknowledge message
         channel.ack(message);
-        console.log(
-          `${SERVICE_NAME} contains enough ingredients for '${order.name}'. Sending confirmation to kitchen service...`
-        );
-        kitchenService.confirmOrder(order);
       },
       {
         noAck: false, // Do not automatically acknowledge messages
@@ -72,3 +73,21 @@ const startOrderIngredientsCheckConsumer = async () => {
 export const messageBrokerService = {
   startOrderIngredientsCheckConsumer,
 };
+
+// let missingIngredients = await getMissingIngredientsForOrder(order);
+// const ioWarehouse = getSocketConnection();
+// while (missingIngredients.length > 0) {
+//   console.log(
+//     `${SERVICE_NAME} does not contain enough ingredients to prepare'${order.name}' order. Missing ingredients:`
+//   );
+//   missingIngredients.forEach((ingredient) => {
+//     console.log(
+//       `  - ${ingredient.name} -> required: ${ingredient.required}, available: ${ingredient.available}`
+//     );
+//   });
+//   console.log("Going to market to buy missing ingredients...");
+//   // Go to the market to buy missing ingredients
+//   await marketService.buyIngredients(missingIngredients);
+//   missingIngredients = await getMissingIngredientsForOrder(order);
+//   ioWarehouse.emit("ingredients_purchased", await Ingredient.find());
+// }

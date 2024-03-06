@@ -1,7 +1,7 @@
 import { Recipe, Ingredient } from "../models/index.js";
 import { messageBrokerService } from "../services/index.js";
 
-import { getSocketConnection } from "../config/index.js";
+import { getSocketConnection, getOrdersLogger } from "../config/index.js";
 
 let orderId = 1;
 
@@ -14,6 +14,15 @@ const addNew = async (req, res) => {
     newOrder["orderId"] = orderId++;
 
     await messageBrokerService.sendOrderToCheckIngredients(newOrder);
+
+    try {
+      const ordersLogger = getOrdersLogger();
+      ordersLogger.info(
+        `Order #${newOrder.orderId} created - Dish: ${newOrder.name}`
+      );
+    } catch (err) {
+      console.log("Error in logging", err);
+    }
 
     res.status(200).json({
       message: `Order for '${newOrder.name}' succesfully sent for ingredients check to warehouse service`,

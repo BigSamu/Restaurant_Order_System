@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useOrderContext } from "../../contexts/OrderContext.jsx";
 
 import { Button, Toast, ToastContainer } from "react-bootstrap";
-import "./styles.css"; // Adjust the path to your CSS file accordingly
+import "./ButtonStyles.css"; // Adjust the path to your CSS file accordingly
 
 import { kitchenService } from "../../services/index.js";
 
