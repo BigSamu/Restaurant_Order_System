@@ -4,8 +4,7 @@
 
 import express from "express";
 import cors from "cors";
-import http from "http"; // Import http module
-import { Server as SocketIOServer } from "socket.io"; // Import Socket.IO
+import http from "http";
 
 import {
   RESTAURANT_ORDER_SYSTEM_DOMAIN,
@@ -14,7 +13,7 @@ import {
   SERVICE_NAME,
   KITCHEN_API_PATH_SUFFIX,
 } from "./config/index.js";
-import { recipeRouter, orderRouter } from "./routes/index.js";
+import { recipeRouter, orderRouter, ingredientRouter } from "./routes/index.js";
 import {
   connectDB,
   connectMessageBroker,
@@ -30,7 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Set up CORS policy
-
 const allowedOrigins =
   process.env.NODE_ENV === "development"
     ? [
@@ -58,6 +56,8 @@ preloadRecipes();
 // Subscribe API routes
 app.use(`/${KITCHEN_API_PATH_SUFFIX}`, recipeRouter);
 app.use(`/${KITCHEN_API_PATH_SUFFIX}`, orderRouter);
+app.use(`/${KITCHEN_API_PATH_SUFFIX}`, ingredientRouter);
+
 
 // Create an HTTP server and pass the Express app
 const httpServer = http.createServer(app);

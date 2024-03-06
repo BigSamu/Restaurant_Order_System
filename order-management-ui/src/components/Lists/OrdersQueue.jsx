@@ -1,37 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useOrderContext } from "../../contexts/OrderContext.jsx";
-import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from "../../config/index.js";
 
-import ListGroup from "react-bootstrap/ListGroup";
+import { ListGroup, Alert } from "react-bootstrap";
 
 import io from "socket.io-client";
+import { RESTAURANT_ORDER_SYSTEM_DOMAIN } from "../../config/index.js";
 
 const OrdersQueue = () => {
   const { currentOrders, setCurrentOrders } = useOrderContext();
-  const [socket] = useState(() => io(RESTAURANT_ORDER_SYSTEM_DOMAIN));
+  const [ioKitchen] = useState(() =>
+    io(`${RESTAURANT_ORDER_SYSTEM_DOMAIN}/kitchen`)
+  );
 
   useEffect(() => {
-    socket.on("order_ready", (orderConfirmed) => {
+    ioKitchen.on("order_ready", (orderConfirmed) => {
       updateOrders(orderConfirmed);
     });
 
     return () => {
-      socket.off("order_ready");
+      ioKitchen.off("order_ready");
     };
   }, []);
 
   const updateOrders = (orderConfirmed) => {
-    setCurrentOrders((currentOrders) =>
-      currentOrders.map((order) =>
+    setCurrentOrders((currentOrders) => {
+      return currentOrders.map((order) =>
         order.orderId === orderConfirmed.orderId
           ? { ...order, ...orderConfirmed }
           : order
-      )
-    );
+      );
+    });
 
     setTimeout(() => {
       updateOrdersStepTwo(orderConfirmed);
-    }, 2000); // Adjust the delay here as needed, 1000 ms = 1 second
+    }, 2000); // Adjust the delay here as needed, 2000 ms = 2 second
   };
 
   const updateOrdersStepTwo = (orderConfirmed) => {
@@ -41,8 +43,16 @@ const OrdersQueue = () => {
   };
 
   return (
-    <div>
+    <div
+      className="overflow-scroll border border-2 border-dark mt-3 px-3"
+      style={{ height: "30vh" }}
+    >
       <div className="my-3">
+        {!currentOrders.length && (
+          <Alert variant="info">
+            Queue is empty. Waiting for orders to Kitchen Service...
+          </Alert>
+        )}
         <ListGroup as="ul">
           {currentOrders &&
             currentOrders.map((item, id) => (

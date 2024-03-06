@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import { Ingredient } from "../models/index.js";
-import { marketService } from "../services/index.js";
 
 const { ObjectId } = mongoose.Types;
 

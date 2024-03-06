@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 
-import { Row, Col, Button, Alert } from "react-bootstrap";
+import { Row, Col} from "react-bootstrap";
+
 import OrderButton from "./components/Buttons/OrderButton.jsx";
 import RestaurtantMenu from "./components/Lists/RestaurtantMenu.jsx";
 import OrdersQueue from "./components/Lists/OrdersQueue.jsx";
+import IngredientsStock from "./components/Tables/IngredientsStock.jsx";
 
 import Layout from "./components/Layout.jsx";
 
@@ -22,6 +24,8 @@ const App = () => {
           {" "}
           <h5 className="fw-bold mb-0">Order's Queue</h5>
           <OrdersQueue />
+          <hr />
+          <IngredientsStock />
         </Col>
       </Row>
     </Layout>

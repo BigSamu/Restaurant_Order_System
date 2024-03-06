@@ -33,6 +33,7 @@ export const DATABASE_URL = `mongodb://${DATABASE_USER}:${DATABASE_PASSWORD}@${D
 export const SERVICE_NAME = "Warehouse";
 export const KITCHEN_API_PATH_SUFFIX = "api/v1/kitchen";
 export const WAREHOUSE_API_PATH_SUFFIX = "api/v1/warehouse";
+export const UI_PORT_SERVICE = 3000;
 
 export const KITCHEN_API_BASE_URL =
   env === "production"

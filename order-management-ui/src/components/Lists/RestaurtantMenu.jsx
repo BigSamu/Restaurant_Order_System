@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-import ListGroup from "react-bootstrap/ListGroup";
+import { ListGroup } from "react-bootstrap";
 import { kitchenService } from "../../services/index.js";
 
 const RestaurtantMenu = () => {
@@ -33,7 +33,15 @@ const RestaurtantMenu = () => {
               >
                 <div className="ms-2 me-auto">
                   <div className="fw-bold">{item.name}</div>
-                  {item.description}
+                  <div>{item.description}</div>
+                  <small className="fw-light fst-italic">
+                    <u>Ingredients:</u>{" "}
+                    {item.ingredients.map((ingredient, index) => (
+                      <span key={index}>
+                        {ingredient.name} ({ingredient.quantity}){" "}
+                      </span>
+                    ))}
+                  </small>
                 </div>
               </ListGroup.Item>
             ))}

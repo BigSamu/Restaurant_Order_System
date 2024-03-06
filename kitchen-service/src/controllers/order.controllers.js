@@ -12,7 +12,7 @@ const addNew = async (req, res) => {
       recipes[Math.floor(Math.random() * recipes.length)].toObject();
     newOrder["status"] = "pending";
     newOrder["orderId"] = orderId++;
-    
+
     await messageBrokerService.sendOrderToCheckIngredients(newOrder);
 
     res.status(200).json({
@@ -40,12 +40,13 @@ const confirmOrder = async (req, res) => {
         { new: true } // If you want to see the updated document
       );
     }
+    const ioKitchen = getSocketConnection();
+    ioKitchen.emit("ingredients_consumed", await Ingredient.find());
     console.log(`Order '${order.name}' is ready for delivery`);
 
     // Send order ready event to UI
-    const io = getSocketConnection();
     order.status = "ready";
-    io.emit("order_ready", order);
+    ioKitchen.emit("order_ready", order);
 
     // Send confirmation to warehouse service
     res.status(200).json({
