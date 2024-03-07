@@ -16,7 +16,7 @@ export const setupSocketConnection = (httpServer, corsOptions) => {
   io.on("connection", (socket) => {
     console.log(`Socket connection setup with ID ${socket.id}`);
 
-    io.on("disconnect", () => {
+    socket.on("disconnect", () => {
       console.log(`Socket connection with ID ${socket.id} disconnected`);
     });
   });
