@@ -2,8 +2,15 @@ import fs from "fs";
 
 import { Recipe, Ingredient } from "../models/index.js";
 import { messageBrokerService } from "../services/index.js";
-import { getSocketConnection, getOrdersLogger, getMessageBrokerChannel } from "../config/index.js";
-import { ORDERS_LOGS_FILE_PATH } from "../config/index.js";
+import {
+  getSocketConnection,
+  getOrdersLogger,
+  getMessageBrokerChannel,
+} from "../config/index.js";
+import {
+  ORDERS_LOGS_FILE_PATH,
+  INGREDIENTS_CHECK_QUEUE,
+} from "../config/index.js";
 
 let orderId = 1;
 
@@ -76,7 +83,7 @@ const resetOrdersIdsAndLogs = async (req, res) => {
     fs.truncate(ORDERS_LOGS_FILE_PATH, 0, () => {
       console.log("Orders logs file cleared");
     });
-    await channel.purgeQueue(INGREDIENTS_CHECK_QUEUE);
+    // await channel.purgeQueue(INGREDIENTS_CHECK_QUEUE);
     console.log(`Queue ${INGREDIENTS_CHECK_QUEUE} purged successfully.`);
     res.status(200).json({ message: "Orders IDs and logs reset" });
   } catch (err) {
