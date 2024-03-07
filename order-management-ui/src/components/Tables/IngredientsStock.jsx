@@ -28,6 +28,9 @@ const IngredientsStock = () => {
     ioWarehouse.on("ingredients_purchased", (updatedIngredientsList) => {
       updateIngredients(updatedIngredientsList);
     });
+    ioWarehouse.on("ingredients_stock_reset", (updatedIngredientsList) => {
+      updateIngredients(updatedIngredientsList);
+    });
 
     return () => {
       ioKitchen.off("ingredients_consumed");

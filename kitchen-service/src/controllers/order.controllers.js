@@ -1,7 +1,9 @@
+import fs from 'fs';
+
 import { Recipe, Ingredient } from "../models/index.js";
 import { messageBrokerService } from "../services/index.js";
-
 import { getSocketConnection, getOrdersLogger } from "../config/index.js";
+import { ORDERS_LOGS_FILE_PATH } from '../config/index.js';
 
 let orderId = 1;
 
@@ -66,7 +68,21 @@ const confirmOrder = async (req, res) => {
   }
 };
 
+const resetOrdersIdsAndLogs = async (req, res) => {
+  try {
+    orderId = 1;
+    fs.truncate(ORDERS_LOGS_FILE_PATH, 0, () => {
+      console.log("Orders logs file cleared");
+    });
+    //await messageBrokerService.emptyOrdersQueue();
+    res.status(200).json({ message: "Orders IDs and logs reset" });
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrong", error: err });
+  }
+};
+
 export const orderControllers = {
   addNew,
   confirmOrder,
+  resetOrdersIdsAndLogs,
 };

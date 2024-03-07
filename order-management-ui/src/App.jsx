@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Row, Col } from "react-bootstrap";
 
@@ -7,10 +7,17 @@ import OrdersAndMarketHistoryModal from "./components/Modals/OrdersAndMarketHist
 import RestaurtantMenu from "./components/Lists/RestaurtantMenu.jsx";
 import OrdersQueue from "./components/Lists/OrdersQueue.jsx";
 import IngredientsStock from "./components/Tables/IngredientsStock.jsx";
-
 import Layout from "./components/Layout.jsx";
 
+import { kitchenService, warehouseService } from "./services/index.js";
+
 const App = () => {
+  
+  useEffect(() => {
+    kitchenService.resetOrdersIdsAndLogs();
+    warehouseService.resetIngredientsStockAndMarketLogs();
+  }, []);
+
   return (
     <Layout>
       <Row className="align-items-strech justify-content-start gx-5">

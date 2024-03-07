@@ -3,7 +3,7 @@ import { SERVICE_NAME, INGREDIENTS_CHECK_QUEUE } from "../config/index.js";
 
 const sendOrderToCheckIngredients = async (order) => {
   try {
-    const channel = getMessageBrokerChannel(); // Use the existing channel
+    const channel = getMessageBrokerChannel();
     channel.sendToQueue(
       INGREDIENTS_CHECK_QUEUE,
       Buffer.from(JSON.stringify(order))
@@ -19,6 +19,18 @@ const sendOrderToCheckIngredients = async (order) => {
   }
 };
 
+const emptyOrdersQueue = async (INGREDIENTS_CHECK_QUEUE) => {
+  const channel = getMessageBrokerChannel();
+
+  try {
+    await channel.purgeQueue(INGREDIENTS_CHECK_QUEUE);
+    console.log(`Queue ${INGREDIENTS_CHECK_QUEUE} purged successfully.`);
+  } catch (error) {
+    console.error("Failed to purge the queue:", error);
+  }
+};
+
 export const messageBrokerService = {
   sendOrderToCheckIngredients,
+  emptyOrdersQueue,
 };

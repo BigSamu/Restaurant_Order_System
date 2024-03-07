@@ -1,5 +1,6 @@
 import winston from "winston";
 import path from "path";
+import { ORDERS_LOGS_FILE_PATH } from "./constants.config.js";
 
 let ordersLogger = null;
 
@@ -12,14 +13,14 @@ export const setupOrdersLogger = () => {
         format: "YYYY-MM-DD HH:mm:ss",
       }),
       winston.format.printf(({ timestamp, message }) => {
-
-        return `${timestamp} - ${message}`;       })
+        return `${timestamp} - ${message}`;
+      })
     ),
     defaultMeta: { service: "kitchen-service" },
     transports: [
       // File transport for logging to a file
       new winston.transports.File({
-        filename: path.resolve(process.cwd(), `./logs/orders.log`),
+        filename: ORDERS_LOGS_FILE_PATH,
       }),
     ],
   });

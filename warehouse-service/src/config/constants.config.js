@@ -39,6 +39,11 @@ export const KITCHEN_API_BASE_URL =
     ? `http://${RESTAURANT_ORDER_SYSTEM_DOMAIN}/${KITCHEN_API_PATH_SUFFIX}`
     : `http://kitchen-service:${KITCHEN_PORT_SERVICE}/${KITCHEN_API_PATH_SUFFIX}`;
 
+export const MARKET_LOGS_FILE_PATH = path.resolve(
+  process.cwd(),
+  "./logs/market.log"
+);
+
 export const MARKET_API_BASE_URL =
   "https://recruitment.alegra.com/api/farmers-market/buy";
 

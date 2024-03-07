@@ -3,7 +3,6 @@ import { Ingredient } from "../models/index.js";
 import { getMessageBrokerChannel } from "../config/index.js";
 import { areEnoughSuppliesInWarehouseForIngredient } from "../utils/index.js";
 import { kitchenService, marketService } from "./index.js";
-
 import { getSocketConnection } from "../config/index.js";
 
 import {
@@ -36,6 +35,7 @@ const startOrderIngredientsCheckConsumer = async () => {
 
         // Go to the market to buy missing ingredients
         let orderReady = false;
+        const ioWarehouse = getSocketConnection();
         while (!orderReady) {
           for (const ingredient of order.ingredients) {
             while (
@@ -48,6 +48,10 @@ const startOrderIngredientsCheckConsumer = async () => {
                 `${SERVICE_NAME} does not contain enough '${ingredient.name}' to prepare '${order.name}' order. Going to market to buy missing ingredients...`
               );
               await marketService.buyIngredient(ingredient, order);
+              ioWarehouse.emit(
+                "ingredients_purchased",
+                await Ingredient.find()
+              );
             }
           }
           orderReady = true;
@@ -62,6 +66,7 @@ const startOrderIngredientsCheckConsumer = async () => {
       },
       {
         noAck: false, // Do not automatically acknowledge messages
+        consumerTag: "orders_consumer",
       }
     );
   } catch (err) {
@@ -75,21 +80,3 @@ const startOrderIngredientsCheckConsumer = async () => {
 export const messageBrokerService = {
   startOrderIngredientsCheckConsumer,
 };
-
-// let missingIngredients = await getMissingIngredientsForOrder(order);
-// const ioWarehouse = getSocketConnection();
-// while (missingIngredients.length > 0) {
-//   console.log(
-//     `${SERVICE_NAME} does not contain enough ingredients to prepare'${order.name}' order. Missing ingredients:`
-//   );
-//   missingIngredients.forEach((ingredient) => {
-//     console.log(
-//       `  - ${ingredient.name} -> required: ${ingredient.required}, available: ${ingredient.available}`
-//     );
-//   });
-//   console.log("Going to market to buy missing ingredients...");
-//   // Go to the market to buy missing ingredients
-//   await marketService.buyIngredients(missingIngredients);
-//   missingIngredients = await getMissingIngredientsForOrder(order);
-//   ioWarehouse.emit("ingredients_purchased", await Ingredient.find());
-// }

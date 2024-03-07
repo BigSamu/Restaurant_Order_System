@@ -26,10 +26,15 @@ const getOrdersLogs = async (options = {}) => {
   return await kitchenBaseService(options).get(`${logsBaseUrl}/orders.log`);
 }
 
+const resetOrdersIdsAndLogs = async (options = {}) => {
+  return await kitchenBaseService(options).get(`${ordersBaseUrl}/reset`);
+}
+
 export const kitchenService = {
   addNewOrder,
   getAllRecipes,
   getOneRecipeById,
   getAllIngredients,
-  getOrdersLogs
+  getOrdersLogs,
+  resetOrdersIdsAndLogs
 };

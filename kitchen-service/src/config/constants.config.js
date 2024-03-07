@@ -33,6 +33,8 @@ export const DATABASE_URL = `mongodb://${DATABASE_USER}:${DATABASE_PASSWORD}@${D
 export const SERVICE_NAME = "Kitchen";
 export const KITCHEN_API_PATH_SUFFIX = "api/v1/kitchen";
 
+export const ORDERS_LOGS_FILE_PATH = path.resolve(process.cwd(), "./logs/orders.log");
+
 export const RECIPES_LIST = [
   {
     name: "Grilled Chicken with Lemon Herb",
