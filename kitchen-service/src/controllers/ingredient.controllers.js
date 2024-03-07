@@ -12,5 +12,5 @@ const getAll = async (req, res) => {
 };
 
 export const ingredientControllers = {
-  getAll
+  getAll,
 };

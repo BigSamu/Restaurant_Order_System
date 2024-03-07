@@ -19,7 +19,7 @@ const sendOrderToCheckIngredients = async (order) => {
   }
 };
 
-const emptyOrdersQueue = async (INGREDIENTS_CHECK_QUEUE) => {
+const emptyOrdersQueue = async () => {
   const channel = getMessageBrokerChannel();
 
   try {

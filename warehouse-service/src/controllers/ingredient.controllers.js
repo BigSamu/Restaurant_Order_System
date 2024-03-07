@@ -11,10 +11,8 @@ import { preloadIngredients } from "../scripts/ingredient.script.js";
 
 import {
   getSocketConnection,
-  getMessageBrokerChannel,
-  connectMessageBroker,
+  getMessageBrokerChannel
 } from "../config/index.js";
-import { messageBrokerService } from "../services/index.js";
 
 const { ObjectId } = mongoose.Types;
 
@@ -51,8 +49,7 @@ const resetIngredientsStockAndMarketLogs = async (req, res) => {
   try {
 
     await channel.purgeQueue(INGREDIENTS_CHECK_QUEUE);
-    console.log(`Queue '${INGREDIENTS_CHECK_QUEUE}' purged successfully.`);
-
+    console.log(`Queue ${INGREDIENTS_CHECK_QUEUE} purged successfully.`);
     await preloadIngredients();
     ioWarehouse.emit("ingredients_stock_reset", await Ingredient.find());
     fs.truncate(MARKET_LOGS_FILE_PATH, 0, () => {
