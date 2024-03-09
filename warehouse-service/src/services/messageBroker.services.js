@@ -74,6 +74,7 @@ const startOrderIngredientsCheckConsumer = async () => {
       },
       {
         noAck: false, // Do not automatically acknowledge messages
+        consumerTag: SERVICE_NAME,
       }
     );
   } catch (err) {
@@ -84,18 +85,7 @@ const startOrderIngredientsCheckConsumer = async () => {
   }
 };
 
-const emptyOrdersQueue = async () => {
-  const channel = getMessageBrokerChannel();
-
-  try {
-    await channel.purgeQueue(INGREDIENTS_CHECK_QUEUE);
-    console.log(`Queue ${INGREDIENTS_CHECK_QUEUE} purged successfully.`);
-  } catch (error) {
-    console.error("Failed to purge the queue:", error);
-  }
-};
 
 export const messageBrokerService = {
   startOrderIngredientsCheckConsumer,
-  emptyOrdersQueue,
 };

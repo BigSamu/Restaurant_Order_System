@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
-
 import { Table } from "react-bootstrap";
-
 import { kitchenService } from "../../services/index.js";
 import io from "socket.io-client";
 import { KITCHEN_SERVICE_DOMAIN, WAREHOUSE_SERVICE_DOMAIN } from "../../config/index.js";
 
 const IngredientsStock = () => {
   const [ingredients, setIngredients] = useState([]);
+  // States to track connection readiness
+  const [isKitchenConnected, setIsKitchenConnected] = useState(false);
+  const [isWarehouseConnected, setIsWarehouseConnected] = useState(false);
+
   const [ioKitchen] = useState(() =>
     io(`${KITCHEN_SERVICE_DOMAIN}`, {
       path: "/socket.io/kitchen/",
@@ -21,25 +23,41 @@ const IngredientsStock = () => {
   );
 
   useEffect(() => {
-    getAllIngredients();
-    ioKitchen.on("ingredients_consumed", (updatedIngredientsList) => {
-      console.log("ingredients_consumed");
-      updateIngredients(updatedIngredientsList);
+    // Set up kitchen connection listeners
+    ioKitchen.on("connect", () => {
+      console.log("Connected to kitchen.");
+      setIsKitchenConnected(true); // Set kitchen connection as ready
     });
-    ioWarehouse.on("ingredients_purchased", (updatedIngredientsList) => {
-      console.log("ingredients_purchased");
-      updateIngredients(updatedIngredientsList);
-    });
-    ioWarehouse.on("ingredients_stock_reset", (updatedIngredientsList) => {
-      console.log("ingredients_stock_reset");
-      updateIngredients(updatedIngredientsList);
+    ioKitchen.on("disconnect", () => {
+      setIsKitchenConnected(false);
     });
 
+    // Set up warehouse connection listeners
+    ioWarehouse.on("connect", () => {
+      console.log("Connected to warehouse.");
+      setIsWarehouseConnected(true); // Set warehouse connection as ready
+    });
+    ioWarehouse.on("disconnect", () => {
+      setIsWarehouseConnected(false);
+    });
+
+    // Socket event listeners
+    ioKitchen.on("ingredients_consumed", updateIngredients);
+    ioWarehouse.on("ingredients_purchased", updateIngredients);
+    ioWarehouse.on("ingredients_stock_reset", updateIngredients);
+
     return () => {
-      ioKitchen.off("ingredients_consumed");
-      ioWarehouse.off("ingredients_purchased");
+      ioKitchen.off("connect").off("disconnect").off("ingredients_consumed");
+      ioWarehouse.off("connect").off("disconnect").off("ingredients_purchased").off("ingredients_stock_reset");
     };
-  }, []);
+  }, [ioKitchen, ioWarehouse]);
+
+  useEffect(() => {
+    // Ensure both connections are ready before fetching ingredients
+    if (isKitchenConnected && isWarehouseConnected) {
+      getAllIngredients();
+    }
+  }, [isKitchenConnected, isWarehouseConnected]); // Depend on the readiness states
 
   const getAllIngredients = async () => {
     try {
@@ -57,13 +75,7 @@ const IngredientsStock = () => {
   return (
     <div>
       <h5 className="fw-bold">Ingredients Stock</h5>
-      <Table
-        striped
-        bordered
-        size="sm"
-        style={{ borderColor: "black" }}
-        className="mt-3"
-      >
+      <Table striped bordered size="sm" style={{ borderColor: "black" }} className="mt-3">
         <thead>
           <tr>
             <th>Ingredient</th>
