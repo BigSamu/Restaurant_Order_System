@@ -23,12 +23,15 @@ const IngredientsStock = () => {
   useEffect(() => {
     getAllIngredients();
     ioKitchen.on("ingredients_consumed", (updatedIngredientsList) => {
+      console.log("ingredients_consumed");
       updateIngredients(updatedIngredientsList);
     });
     ioWarehouse.on("ingredients_purchased", (updatedIngredientsList) => {
+      console.log("ingredients_purchased");
       updateIngredients(updatedIngredientsList);
     });
     ioWarehouse.on("ingredients_stock_reset", (updatedIngredientsList) => {
+      console.log("ingredients_stock_reset");
       updateIngredients(updatedIngredientsList);
     });
 
