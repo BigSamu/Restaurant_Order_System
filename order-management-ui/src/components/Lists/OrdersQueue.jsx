@@ -17,9 +17,6 @@ const OrdersQueue = () => {
   useEffect(() => {
     ioKitchen.on("order_ready", (orderConfirmed) => {
       updateOrders(orderConfirmed);
-      setTimeout(() => {
-        updateOrdersStepTwo(orderConfirmed);
-      }, 2000);
     });
 
     return () => {
@@ -28,19 +25,23 @@ const OrdersQueue = () => {
   }, []);
 
   const updateOrders = (orderConfirmed) => {
-    setCurrentOrders((currentOrders) => {
-      return currentOrders.map((order) =>
+    // Immediately update the order to reflect its ready state
+    setCurrentOrders((currentOrders) =>
+      currentOrders.map((order) =>
         order.orderId === orderConfirmed.orderId
           ? { ...order, ...orderConfirmed }
           : order
-      );
-    });
-  };
-
-  const updateOrdersStepTwo = (orderConfirmed) => {
-    setCurrentOrders((currentOrders) =>
-      currentOrders.filter((order) => order.orderId !== orderConfirmed.orderId)
+      )
     );
+
+    // Schedule the removal of the order, ensuring we're working with the most up-to-date state
+    setTimeout(() => {
+      setCurrentOrders((currentOrders) =>
+        currentOrders.filter(
+          (order) => order.orderId !== orderConfirmed.orderId
+        )
+      );
+    }, 2000);
   };
 
   return (
